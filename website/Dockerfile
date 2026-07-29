@@ -30,6 +30,7 @@ COPY lib/   /usr/share/nginx/html/lib/
 # lists, which is the check that would have caught all three.
 COPY img/   /usr/share/nginx/html/img/
 COPY demo/  /usr/share/nginx/html/demo/
+COPY print/ /usr/share/nginx/html/print/
 
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \

@@ -50,7 +50,7 @@ REQUIRED_FILES=(
   icon-512.png
   site.webmanifest
 )
-REQUIRED_DIRS=( fonts lib img demo )
+REQUIRED_DIRS=( fonts lib img demo print )
 
 # ── every required file and directory must ALSO be in the Dockerfile ───────
 # 🔴 This is the check that matters most, because the other checks cannot see the

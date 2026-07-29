@@ -164,14 +164,16 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
       <div class="demo">
         <span class="label warm">or try the demo record</span>
         <p><strong>This is the only key that will ever appear on this site.</strong> It opens
-        a demo and nothing else — six seconds, made to be taken apart rather than listened to.</p>
+        a demo and nothing else — fifteen seconds, made to be taken apart rather than listened
+        to. Locked, you get a pulse and a drone: something, and something waiting. Unlocked, the
+        line that answers it arrives and the two play as one figure.</p>
         <p>A real key is never published, never posted and never here. It is said to somebody, by
         somebody, and that is the whole distribution. A key you could have read off a website
         would open a record for everyone at once, which is not a record anyone was given.</p>
         <div class="row">
           <button id="demoBtn" class="ghost">Load the demo record</button>
         </div>
-        <code class="demokey" id="demoKey">chef ignore vast rely rare flat dwarf try invest december picture shield eye hub wolf idea dinosaur divide width neck tiger devote swap sweet</code>
+        <code class="demokey" id="demoKey">people tiger talent decade provide find pair enact topic exile later admit tribe jealous hand fly arch video local photo velvet roast option tortoise</code>
         <p class="quiet">Load it, then press Unlock — the key is filled in for you. Try a
         wrong word first if you want to see it refused.</p>
       </div>
@@ -199,6 +201,10 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
         head — it goes on a card, and the card is what you look after. Twenty-four fits one, read
         out at a size you can manage in a badly lit room, which is the only length test that
         matters here.</p>
+        <p class="quiet"><a href="print/zariia-key-card.pdf" download>Download the key card
+        template ▸</a> — two pages at 85 × 55 mm, front and back, ruled to write a key on by
+        hand. The typeset version is <code>brand/key-card.html</code> in the repository, if you
+        would rather print the words than write them.</p>
         <p><strong>A key is not meant to be remembered.</strong> Nobody can hold twenty-four random
         words in their head, and nothing here asks anyone to. A key is written down, read out, and
         guarded. That it cannot be memorised is the design and not a cost of it — a key small enough
@@ -323,7 +329,11 @@ async function loadFile(file){
 
 $('unlock').addEventListener('click', async ()=>{
   fail('');
-  const raw = $('key').value.trim(); if(!raw) return;
+  // 🔴 Was `if(!raw) return;` — a silent no-op. After Lock clears the key field,
+  // pressing Unlock did nothing and said nothing, so the page read as broken when it
+  // was waiting for a key it had just discarded. Found by Prayas, 29 July 2026.
+  const raw = $('key').value.trim();
+  if(!raw){ fail(sealedBlob ? 'Enter the key. Locking cleared it from this page.' : 'Load a file first.'); return; }
   let keySpec;
   try{
     const parsed = await parseKey(raw);
@@ -371,7 +381,8 @@ $('lock').addEventListener('click', ()=>{
   $('passonBtn').textContent = 'Show the key, to pass on ▸';
   $('lock').hidden = true;
   fail('');
-  say('Locked. The sealed channel is closed and the key is gone from this page.');
+  say('Locked. The sealed channel is closed and the key is gone from this page — enter it again to reopen.');
+  $('key').focus();
   if(playing){ stop(); play(); }   // the open song keeps going; the second channel stops
 });
 
@@ -383,7 +394,7 @@ $('demoBtn').addEventListener('click', async ()=>{
     // when the file was briefly missing on 29 July 2026, and served it to everyone.
     // The query string is part of the cache key, so bumping it retires a bad entry —
     // and must be bumped whenever the demo record is replaced.
-    const r = await fetch('demo/zariia-demo.flac?v=20260729a');
+    const r = await fetch('demo/zariia-demo.flac?v=20260729b');
     if(!r.ok) throw new Error(`the file did not load (HTTP ${r.status})`);
     const buf = new Uint8Array(await r.arrayBuffer());
     await loadFile(new File([buf], 'zariia-demo.flac', {type:'audio/flac'}));
