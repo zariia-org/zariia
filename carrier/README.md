@@ -106,10 +106,14 @@ drop, or reuse one key across every drop in a scene (`--key`). "One scene key" v
 "per-drop keys" (`zariia.md` "Open") is decided by whether the label reuses a key — the
 code is identical either way.
 
-**Nothing is stored** . No keyring, no localStorage — the key lives in a
-person's memory or on paper and is entered per session; after unlocking, the player can
-show the words again so a keyholder can pass them on. Absence is the answer to a seized
-device.
+**Nothing is stored** . No keyring, no localStorage — the key is entered per
+session, and after unlocking the player can show the words again so a keyholder can pass
+them on. Absence is the answer to a seized device.
+
+**A key is not meant to be remembered.** Nobody can hold twenty-four random words in their
+head, and nothing here asks anyone to. A key is written down, read out, and guarded. That it
+cannot be memorised is the point rather than a cost: a key small enough to remember is a key
+small enough to guess. What a keyholder looks after is the paper it is written on.
 
 The one boundary that cannot be engineered away: **the content is only ever as safe as
 the key and who holds it.** The music sounding identical is solved; confidentiality rests

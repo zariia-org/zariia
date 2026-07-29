@@ -82,6 +82,9 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
 #err{color:var(--terra-hi);font-size:13px;margin-top:8px;min-height:1.2em}
 #passon{margin-top:14px;padding:16px;background:rgba(21,12,7,.55);border:1px solid rgba(224,174,92,.3);
   font-size:13px;line-height:1.9;color:var(--gold-pale);word-spacing:.28em}
+.passon-cap{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--slip-dim);word-spacing:normal}
+.passon-padded{margin-top:8px;color:var(--slip);opacity:.92}
 </style>
 </head>
 <body>
@@ -160,8 +163,11 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
     <div class="rise">
       <div class="demo">
         <span class="label warm">or try the demo record</span>
-        <p>Six seconds, made to be taken apart rather than listened to. Its key is printed
-        here because it is a demo — a real key is never published.</p>
+        <p><strong>This is the only key that will ever appear on this site.</strong> It opens
+        a demo and nothing else — six seconds, made to be taken apart rather than listened to.</p>
+        <p>A real key is never published, never posted and never here. It is said to somebody, by
+        somebody, and that is the whole distribution. A key you could have read off a website
+        would open a record for everyone at once, which is not a record anyone was given.</p>
         <div class="row">
           <button id="demoBtn" class="ghost">Load the demo record</button>
         </div>
@@ -184,6 +190,28 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
       already knows how to decode, so there is no decoder to download and no third party
       involved in opening a record.</p>
       <p class="quiet"><a href="the-object.html">How the format works ▸</a></p>
+
+      <div class="source">
+        <span class="label"><span class="star"></span>saying a key out loud</span>
+        <p>A key is twenty-four words because twenty-four words can be said to someone. That is
+        how a key moves — not by link, not by message, but by one person telling another. So the
+        place a key is most exposed is a room, and rooms are not private.</p>
+        <p><strong>A key is not meant to be remembered.</strong> Nobody can hold twenty-four random
+        words in their head, and nothing here asks anyone to. A key is written down, read out, and
+        guarded. That it cannot be memorised is the design and not a cost of it — a key small enough
+        to remember is a key small enough to guess. What a keyholder looks after is the paper.</p>
+        <p>You may therefore pad it with nonsense words, and this page will weed them out: <strong>any
+        word that is not one of the 2048 wordlist words is discarded</strong>, and the checksum
+        confirms what is left. Nothing has to be agreed beforehand and there is no second secret to
+        remember. The padding cannot be improvised freely, though — the wordlist is made of short
+        common English words, so ordinary speech collides with it constantly. Let the tool write
+        the padded version for you.</p>
+        <p class="quiet">This is not concealment, and it would be dishonest to sell it as any. The
+        rule is written down in the source below, so anybody listening properly strips the padding
+        exactly as you do. What it raises is the cost of being overheard <em>carelessly</em> — a
+        half-caught sentence, a bystander, a recording nobody examines. That is worth something and
+        it is not protection.</p>
+      </div>
 
       <div class="source">
         <span class="label"><span class="star"></span>the source</span>
@@ -224,7 +252,7 @@ import { extract, hasSealedChannel, audioDigest, extractSignature } from './lib/
 import { verifyRelease } from './lib/zariia-sign.mjs?v=20260729a';
 import { unseal, KEYMODE } from './lib/zariia-crypto.mjs?v=20260729a';
 import { readBundle, ENTRY, CODEC } from './lib/zariia-bundle.mjs?v=20260729a';
-import { parseKey, keyToMnemonic } from './lib/zariia-key.mjs?v=20260729a';
+import { parseKey, keyToMnemonic, padMnemonic } from './lib/zariia-key.mjs?v=20260729a';
 
 // This page reaches nowhere else. Sealed channels are Opus (or FLAC/WAV), all of which
 // the browser decodes natively, so there is no model to fetch and no CSP exception.
@@ -360,10 +388,28 @@ $('demoBtn').addEventListener('click', async ()=>{
   }catch(e){ fail(`Could not load the demo: ${e.message}`); }
 });
 
+// Passing it on: the key itself, and a version padded for saying where you can be
+// overheard. The padded one is GENERATED rather than left to the speaker — the wordlist
+// is 2048 short common English words, so improvised filler collides with it constantly
+// and a collision breaks the key. The page tells people to let the tool write it; this
+// is the tool writing it.
 $('passonBtn').addEventListener('click', async ()=>{
   const el=$('passon');
-  if(el.hidden && passKey){ el.textContent = await keyToMnemonic(passKey); el.hidden=false;
-    $('passonBtn').textContent='Hide the key ▾'; }
+  if(el.hidden && passKey){
+    const words = await keyToMnemonic(passKey);
+    el.innerHTML = '';
+    const plain = document.createElement('div');
+    plain.textContent = words;
+    const cap = document.createElement('div');
+    cap.className = 'passon-cap';
+    cap.textContent = 'padded, for saying aloud — the padding is weeded out on the way in';
+    const padded = document.createElement('div');
+    padded.className = 'passon-padded';
+    padded.textContent = padMnemonic(words, 9);
+    el.append(plain, cap, padded);
+    el.hidden=false;
+    $('passonBtn').textContent='Hide the key ▾';
+  }
   else { el.hidden=true; $('passonBtn').textContent='Show the key, to pass on ▸'; }
 });
 

@@ -11,9 +11,14 @@
 //     zariia-crypto — so there is no offline-guessing surface (unlike a passphrase).
 //   - Two interchangeable FORMS of the same 32 bytes: the word mnemonic (to pass hand to
 //     hand) and hex (technical). Both round-trip losslessly.
-//   - NOTHING IS STORED . No keyring, no localStorage. The key lives in a
-//     person's memory or on paper and is entered per session. Absence is the answer to a
-//     seized device; a stored key would be the thing to seize.
+//   - NOTHING IS STORED . No keyring, no localStorage. Absence is the answer
+//     to a seized device; a stored key would be the thing to seize.
+//   - 🔴 A KEY IS NOT MEANT TO BE REMEMBERED. Nobody can hold 24 random words in their
+//     head, and nothing here asks them to. A key is written down, READ OUT, and guarded.
+//     That it cannot be memorised is the design and not a cost of it: a key small enough
+//     to remember is a key small enough to guess. So what a keyholder looks after is the
+//     paper it is written on, not their recollection. Never write, here or on the site,
+//     that a key lives in somebody's memory. (Prayas, 29 July 2026.)
 //   - Per-drop or per-scene is a USAGE choice, not a mechanism: the same key can seal one
 //     drop or every drop in a scene. "One scene key" vs "per-drop keys" (zariia.md
 //     "Open") is decided by whether the label reuses a key, not by different code.

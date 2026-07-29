@@ -66,7 +66,18 @@ implement it are readable here and served live at `zariia.org/lib/`.
 
 **The key** is 256 bits, in two interchangeable forms: 24 words (BIP-0039, with a checksum that
 catches a mis-heard word) for saying to someone, and 64 hex characters for machines. Nothing is
-stored — no keyring, no `localStorage`. A key lives in a person's memory or on paper.
+stored — no keyring, no `localStorage`.
+
+**A key is not meant to be remembered.** Nobody can hold twenty-four random words in their head,
+and nothing here asks anyone to. A key is written down, read out, and guarded. That it cannot be
+memorised is the design and not a cost of it: a key small enough to remember is a key small enough
+to guess. What a keyholder looks after is the paper.
+
+Because a key is read aloud, it may be padded with nonsense words. Any word outside the BIP-0039
+list is chaff and is weeded out, and the checksum confirms what survives. This is **not**
+concealment — the rule is public, so an attentive listener strips the padding too. It raises the
+cost of being overheard carelessly, and nothing more. Padding is generated rather than improvised:
+the wordlist is 2048 short common English words, and ordinary speech collides with it constantly.
 
 The one boundary that cannot be engineered away: **the content is only ever as safe as the key and
 who holds it.** The music sounding identical is solved. Confidentiality rests entirely on key
