@@ -112,12 +112,32 @@ than warning — verified, because a guard that only reports is not a guard. A p
 only while nobody passes a flag was a property of the operator's attention, not of the system.
 
 
-**1. Twelve words, not twenty-four.** Twenty-four words carries 256 bits, which is a Bitcoin
-convention inherited for reasons that do not apply here — it exists because a wallet seed guards
-irreversible money forever. A Zariia key guards one record. **Twelve words is 128 bits**, which is
-beyond any brute-force horizon that matters, and it is *dramatically* more passable: sayable across
-a table, writable on a card, rememberable for the length of an evening. Halving the length roughly
-doubles the chance the key actually travels, and travelling is the whole point.
+**1. ❌ DECIDED AGAINST, 29 July 2026 — twenty-four words stays.** The recommendation below was
+sound on its premise and the premise has since been replaced. It assumed the binding constraint was
+*sayability* — how much a person can hold and utter across a table — and concluded that halving the
+length roughly doubles the chance the key travels.
+
+But a key is not recalled and then said. It is **written down, read out and guarded**
+(`zariia.md`; the correction of 29 July), so the constraint is physical rather than mnemonic:
+**does the key fit legibly on a visiting card?** Prayas set that criterion, and it is testable
+rather than arguable.
+
+**Tested, not assumed.** `brand/key-card.html` is an 85 × 55 mm card rendered at print scale. The
+twenty-four words set in six lines at **9.6 pt**, occupying 31.5 mm of the 55 mm height with the
+mark, a footer line and the drop reference — and room left under it. At 7.2 pt they took four lines
+and less than a third of the card, which is why the type was *raised* rather than the key
+shortened: the card exists to be read aloud, and spare height is better spent on legibility.
+
+So the length is not costing anything the design depends on, and 256 bits is kept for free. The
+original text is preserved below, because the reasoning is the point and the premise-shift is the
+interesting part.
+
+> Twenty-four words carries 256 bits, which is a Bitcoin convention inherited for reasons that do
+> not apply here — it exists because a wallet seed guards irreversible money forever. A Zariia key
+> guards one record. Twelve words is 128 bits, which is beyond any brute-force horizon that
+> matters, and it is *dramatically* more passable: sayable across a table, writable on a card,
+> rememberable for the length of an evening. Halving the length roughly doubles the chance the key
+> actually travels, and travelling is the whole point.
 
 **2. Do not offer passphrase mode for public releases.** The code already carries the caution and
 it should be promoted to a rule. A released file is *in the wild*, so an attacker has the

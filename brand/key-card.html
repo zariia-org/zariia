@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zariia — key card, 85 × 55 mm</title>
+<style>
+/* The key card. Print at 85 × 55 mm — a standard visiting card.
+   The test this exists to settle: does a 24-word key fit on one, legibly,
+   at a size a person can read aloud in a room that is not brightly lit?
+   Sizes are in mm so the render IS the artefact, not an approximation of it. */
+@font-face{font-family:'Cutive Mono';src:url('../website/fonts/cutive-mono-latin.woff2') format('woff2');font-display:block}
+@font-face{font-family:'EB Garamond';src:url('../website/fonts/eb-garamond-400-latin.woff2') format('woff2');font-display:block}
+@page{size:85mm 55mm;margin:0}
+html,body{margin:0;padding:0;background:#3a3a3a}
+.sheet{display:flex;flex-direction:column;gap:6mm;padding:6mm;align-items:flex-start}
+
+.card{
+  width:85mm;height:55mm;box-sizing:border-box;
+  background:#150c07;color:#eadfcb;
+  padding:4.6mm 5mm;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:0 1mm 3mm rgba(0,0,0,.5);
+}
+/* terracotta as a MASS, never a line — brand rule */
+.card::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(58% 46% at 88% 8%, rgba(180,82,42,.20), transparent 72%);
+  pointer-events:none}
+
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:3mm}
+.mark{font-family:'EB Garamond',Georgia,serif;font-size:4.4mm;letter-spacing:.04em;color:#e0ae5c}
+.side{font-family:'Cutive Mono',monospace;font-size:1.9mm;letter-spacing:.14em;
+  text-transform:uppercase;color:#a3947a}
+
+.words{
+  font-family:'Cutive Mono',monospace;
+  font-size:3.4mm;           /* ≈ 9.6 pt — raised after measuring: 24 words used
+                                only 31.5 of 55 mm at 7.2 pt, and the card exists to
+                                be READ ALOUD, so spare height is better spent on
+                                legibility than left as margin. */
+  line-height:1.62;
+  color:#eadfcb;
+  margin-top:3.1mm;
+  word-spacing:.06em;
+  flex:1;
+}
+.words b{font-weight:normal;color:#f2d79c}
+
+.foot{display:flex;align-items:flex-end;justify-content:space-between;gap:3mm;
+  border-top:.18mm solid rgba(234,223,203,.16);padding-top:2mm}
+.foot .note{font-family:'EB Garamond',Georgia,serif;font-size:2.3mm;line-height:1.34;
+  color:#a3947a;max-width:52mm}
+.foot .rec{font-family:'Cutive Mono',monospace;font-size:1.9mm;letter-spacing:.1em;
+  color:#a3947a;text-align:right;white-space:nowrap}
+
+/* the back — what a keyholder is told, which the-key.md lists as unwritten */
+.card.back{background:#0d0705}
+.card.back .body{font-family:'EB Garamond',Georgia,serif;font-size:2.7mm;line-height:1.5;
+  color:#eadfcb;margin-top:2.6mm;flex:1}
+.card.back .body p{margin:0 0 1.9mm}
+.card.back .body em{color:#e0ae5c;font-style:normal}
+
+.label{font-family:'Cutive Mono',monospace;font-size:2.9mm;color:#888;margin:0 0 -3mm}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<p class="label">front — 85 × 55 mm</p>
+<div class="card">
+  <div class="head">
+    <span class="mark">Zariia</span>
+    <span class="side">the key</span>
+  </div>
+  <div class="words">
+    chef ignore vast rely rare flat dwarf try invest december picture shield
+    eye hub wolf idea dinosaur divide width neck tiger devote swap sweet
+  </div>
+  <div class="foot">
+    <span class="note">Read it out. Do not copy it anywhere it will be kept.</span>
+    <span class="rec">drop 00 · demo</span>
+  </div>
+</div>
+
+<p class="label">back</p>
+<div class="card back">
+  <div class="head">
+    <span class="side">what this opens</span>
+    <span class="side">zariia.org/player</span>
+  </div>
+  <div class="body">
+    <p>The record plays for anyone. These words unlock the second channel, and
+    both then play together.</p>
+    <p>Holding this does not make you a member of anything. It is a trace of
+    having been in the room, and yours to pass on.</p>
+    <p><em>Say it, don't send it.</em> If you are somewhere you can be overheard,
+    the player will let you pad it with nonsense words.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
