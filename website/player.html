@@ -144,6 +144,7 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
         <div class="row" id="keyRow" hidden>
           <input type="text" id="key" placeholder="paste the key — 24 words, or hex" autocomplete="off" spellcheck="false">
           <button id="unlock" class="fire">Unlock</button>
+          <button id="lock" class="ghost" hidden>Lock</button>
         </div>
         <div class="row" id="passonRow" hidden>
           <button id="passonBtn" class="ghost">Show the key, to pass on ▸</button>
@@ -188,7 +189,7 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
         <span class="label"><span class="star"></span>the source</span>
         <p>This page is the whole player. Nothing is minified and nothing is hidden, so the
         quickest reading is your browser's view-source — the modules it imports are served
-        from <a href="lib/zariia-crypto.mjs">/lib/</a> and are plain, short files.</p>
+        from <a href="lib/zariia-crypto.mjs?v=20260729a">/lib/</a> and are plain, short files.</p>
         <ul>
           <li><a href="https://github.com/zariia-org/zariia/blob/main/website/player.html">player.html</a>
             — this page, decryption and playback included</li>
@@ -219,11 +220,11 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
 </div></div></footer>
 
 <script type="module">
-import { extract, hasSealedChannel, audioDigest, extractSignature } from './lib/zariia-flac.mjs';
-import { verifyRelease } from './lib/zariia-sign.mjs';
-import { unseal, KEYMODE } from './lib/zariia-crypto.mjs';
-import { readBundle, ENTRY, CODEC } from './lib/zariia-bundle.mjs';
-import { parseKey, keyToMnemonic } from './lib/zariia-key.mjs';
+import { extract, hasSealedChannel, audioDigest, extractSignature } from './lib/zariia-flac.mjs?v=20260729a';
+import { verifyRelease } from './lib/zariia-sign.mjs?v=20260729a';
+import { unseal, KEYMODE } from './lib/zariia-crypto.mjs?v=20260729a';
+import { readBundle, ENTRY, CODEC } from './lib/zariia-bundle.mjs?v=20260729a';
+import { parseKey, keyToMnemonic } from './lib/zariia-key.mjs?v=20260729a';
 
 // This page reaches nowhere else. Sealed channels are Opus (or FLAC/WAV), all of which
 // the browser decodes natively, so there is no model to fetch and no CSP exception.
@@ -279,7 +280,9 @@ async function loadFile(file){
 
   if (hasSealedChannel(fileBytes)){
     sealedBlob = extract(fileBytes);
-    chSealed.classList.add('latent');
+    chSealed.classList.remove('ignited'); chSealed.classList.add('latent');
+    secondBuf = null; passKey = null; $('lock').hidden = true;
+    $('passonRow').hidden = true; $('passon').hidden = true;
     $('keyRow').hidden=false;
     say(`A sealed channel is present (${(sealedBlob.length/1024).toFixed(1)} KB). Hold the key to fill it.`);
   } else {
@@ -317,11 +320,28 @@ $('unlock').addEventListener('click', async ()=>{
     passKey = keySpec.mode===KEYMODE.RAW ? keySpec.rawKey : null;
     $('passonRow').hidden = !passKey;
     $('passon').hidden = true; $('passonBtn').textContent='Show the key, to pass on ▸';
+    $('lock').hidden = false;
     if(playing){ stop(); play(); }
   }catch(e){
     chSealed.classList.remove('ignited'); chSealed.classList.add('latent'); secondBuf=null;
     fail(`The key was right — the seal opened. What failed afterwards was playing it back: ${e.message}`);
   }
+});
+
+// Lock — the counterpart to Unlock, and the only way to undo it short of a reload.
+// It drops the decoded channel and the key together: with nothing stored anywhere, a
+// locked page holds no more than it did before the key was said. The record returns to
+// what anyone has: the open song, and a sealed channel you can see and cannot hear.
+$('lock').addEventListener('click', ()=>{
+  secondBuf = null; passKey = null;
+  $('key').value = '';
+  chSealed.classList.remove('ignited'); chSealed.classList.add('latent');
+  $('passonRow').hidden = true; $('passon').hidden = true;
+  $('passonBtn').textContent = 'Show the key, to pass on ▸';
+  $('lock').hidden = true;
+  fail('');
+  say('Locked. The sealed channel is closed and the key is gone from this page.');
+  if(playing){ stop(); play(); }   // the open song keeps going; the second channel stops
 });
 
 // The demo record, served from this site. Its key is on the page because it is a demo.
