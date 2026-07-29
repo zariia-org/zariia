@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Zariia">
+  <title>Zariia</title>
+  <!--
+    Zariia symbol — rev. 26 July 2026: elegant, stable, deep, sober.
+
+    A key drawn as a FINE LINE rather than a gold mass, STANDING on a ground line rather
+    than floating. Its BOW is a ring holding a lit APERTURE (the keyed truth, revealed —
+    an opening, never a padlock). Its BIT is a small WAVEFORM (the music). The field is
+    deep: fired clay above cooling to near-black slip at the root, with a vignette so the dark has
+    distance in it rather than being a flat fill.
+
+    Sobriety is the brief. No bloom, no neon, no scattered stars — one warm light, held.
+    The earlier revision (25 Jul) used a heavy gold key with a blurred glow layer; it read
+    as candy at small sizes and was retired.
+  -->
+  <defs>
+    <linearGradient id="zs-field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#2b1509"/>
+      <stop offset="0.58" stop-color="#190e08"/>
+      <stop offset="1"    stop-color="#0e0705"/>
+    </linearGradient>
+
+    <!-- depth: the dark is not flat — it recedes at the corners -->
+    <radialGradient id="zs-vignette" cx="0.5" cy="0.44" r="0.72">
+      <stop offset="0"    stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.62" stop-color="#000000" stop-opacity="0.10"/>
+      <stop offset="1"    stop-color="#000000" stop-opacity="0.42"/>
+    </radialGradient>
+
+    <!-- one warm light, restrained: no bloom filter, a quiet halo only -->
+    <radialGradient id="zs-halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#f0a94e" stop-opacity="0.32"/>
+      <stop offset="0.55" stop-color="#e08a34" stop-opacity="0.11"/>
+      <stop offset="1"    stop-color="#e08a34" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="zs-aperture" cx="0.5" cy="0.44" r="0.62">
+      <stop offset="0"    stop-color="#ffe6bd"/>
+      <stop offset="0.46" stop-color="#f0a24a"/>
+      <stop offset="1"    stop-color="#b8541f"/>
+    </radialGradient>
+
+    <!-- userSpaceOnUse is REQUIRED: the shank is a vertical line, whose objectBoundingBox
+         is zero-width, which makes an objectBoundingBox gradient degenerate and the stroke
+         vanish entirely. Do not change this back to the default units. -->
+    <linearGradient id="zs-metal" gradientUnits="userSpaceOnUse" x1="42" y1="22" x2="78" y2="100">
+      <stop offset="0"   stop-color="#f4d79a"/>
+      <stop offset="0.5" stop-color="#e0ae5c"/>
+      <stop offset="1"   stop-color="#c98f3e"/>
+    </linearGradient>
+
+    <clipPath id="zs-tile"><rect x="0" y="0" width="120" height="120" rx="27"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#zs-tile)">
+    <rect width="120" height="120" fill="url(#zs-field)"/>
+
+    <!-- the quiet halo around the one light -->
+    <circle cx="60" cy="44" r="34" fill="url(#zs-halo)"/>
+
+    <!-- THE GROUND LINE — the key stands rather than floats. This is the stability. -->
+    <line x1="34" y1="100" x2="86" y2="100" stroke="#e0ae5c" stroke-width="0.9" opacity="0.28"/>
+    <line x1="46" y1="100" x2="74" y2="100" stroke="#f4d79a" stroke-width="0.9" opacity="0.30"/>
+
+    <!-- ── THE KEY, drawn in line ────────────────────────────────────────── -->
+    <!-- bow: a ring, not a disc -->
+    <circle cx="60" cy="44" r="20" fill="none" stroke="url(#zs-metal)" stroke-width="2.4"/>
+    <!-- the lit aperture held inside it: the opening, the keyed truth -->
+    <circle cx="60" cy="44" r="8.4" fill="url(#zs-aperture)"/>
+    <circle cx="60" cy="44" r="8.4" fill="none" stroke="#ffeccb" stroke-width="0.7" opacity="0.6"/>
+
+    <!-- shank: one clean vertical, the spine of the mark -->
+    <line x1="60" y1="64" x2="60" y2="94" stroke="url(#zs-metal)" stroke-width="2.4" stroke-linecap="round"/>
+
+    <!-- bit: a small waveform — the music, restrained -->
+    <path d="M60 88 q4 -5.5 8 0 t8 0" fill="none" stroke="url(#zs-metal)"
+          stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- one specular note on the ring: the medium showing, not a shine effect -->
+    <path d="M46.5 33.5 a20 20 0 0 1 15 -8.5" fill="none" stroke="#fbe7c0"
+          stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+
+    <rect width="120" height="120" fill="url(#zs-vignette)"/>
+  </g>
+</svg>

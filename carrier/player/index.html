@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zariia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Cutive+Mono&display=swap" rel="stylesheet">
+<style>
+  /* Zariia brand tokens (inlined so the player is one self-contained page — . */
+  :root {
+    --z-night-top:#0a0f2e; --z-night-mid:#0b0a20; --z-night-root:#1a0d10;
+    --z-cobalt-glow:#1c3aa0; --z-black:#070813;
+    --z-gold:#f5a81f; --z-gold-hot:#ffd766;
+    --z-fire:#e0431e; --z-fire-hot:#ff7a34;
+    --z-teal:#1e8a8a; --z-teal-hot:#37c4c4; --z-teal-latent:#2a6a9a;
+    --z-cream:#f4ece0; --z-cream-dim:#b0a89c;
+    --z-line:rgba(244,236,224,0.14); --z-ink-glass:rgba(8,10,26,0.55);
+    --z-display:'Yatra One',serif;
+    --z-mono:'Cutive Mono',ui-monospace,monospace;
+    --z-ease:cubic-bezier(0.22,0.61,0.36,1); --z-breath:4.5s; --z-ignite:1.3s;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    font-family:var(--z-mono); color:var(--z-cream); min-height:100vh; overflow-x:hidden;
+    background:
+      radial-gradient(64% 48% at 60% 60%, rgba(28,58,160,0.30), transparent 70%),
+      radial-gradient(90% 42% at 50% 112%, rgba(138,48,22,0.60), transparent 70%),
+      linear-gradient(178deg, var(--z-night-top) 0%, var(--z-night-mid) 56%, var(--z-night-root) 100%);
+    background-attachment:fixed;
+    padding:clamp(20px,5vw,54px); display:flex; flex-direction:column; gap:clamp(22px,4vw,40px);
+    max-width:860px; margin:0 auto;
+  }
+  body::after { /* grain — the medium shows through */
+    content:""; position:fixed; inset:0; pointer-events:none; opacity:0.05; z-index:99;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  header { display:flex; align-items:center; gap:16px; }
+  header .mark { width:52px; height:52px; flex:none; filter:drop-shadow(0 4px 22px rgba(224,67,30,0.3)); }
+  header .mark svg { width:100%; height:100%; display:block; }
+  header .wm { font-family:var(--z-display); font-size:clamp(1.9rem,7vw,2.9rem); line-height:0.9; letter-spacing:0.01em;
+               text-shadow:0 0 44px rgba(245,168,31,0.2); }
+  header .tag { font-size:0.66rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--z-cream-dim); margin-top:5px; }
+
+  .lede { font-family:var(--z-display); font-size:clamp(1.15rem,3.6vw,1.7rem); line-height:1.34; max-width:26ch; color:var(--z-cream); }
+
+  /* ---- the two channels: the live hero ---- */
+  #stage { position:relative; display:flex; align-items:flex-end; justify-content:center;
+           gap:clamp(40px,16vw,120px); height:clamp(220px,40vh,380px); margin:clamp(4px,2vw,14px) 0; }
+  .channel { position:relative; width:clamp(52px,15vw,88px); height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; }
+  .channel .vessel { position:absolute; bottom:0; width:100%; height:100%;
+                     border-radius:46% 54% 47% 53% / 92% 90% 8% 10%;
+                     border:1px solid rgba(244,236,224,0.09); overflow:hidden; }
+  .channel .fill { position:absolute; inset:0; transform-origin:bottom center; transform:scaleY(0); opacity:0;
+                   background:linear-gradient(to top, var(--c-hot,transparent), var(--c,transparent) 60%, rgba(0,0,0,0.16) 100%);
+                   transition:transform var(--z-ignite) var(--z-ease), opacity 0.7s var(--z-ease); }
+  .channel .core { position:absolute; left:50%; bottom:4%; width:22%; height:0; transform:translateX(-50%);
+                   background:linear-gradient(to top, #fff2d6, transparent); border-radius:40%; opacity:0; filter:blur(1px);
+                   transition:height var(--z-ignite) var(--z-ease), opacity 0.7s; }
+  .channel .bloom { position:absolute; left:50%; bottom:-6%; width:240%; height:120%; transform:translateX(-50%);
+                    background:radial-gradient(50% 60% at 50% 60%, var(--c-hot,transparent), var(--c,transparent) 42%, transparent 74%);
+                    opacity:0; filter:blur(15px); transition:opacity 0.9s var(--z-ease); pointer-events:none; }
+  .channel .name { position:absolute; bottom:-30px; font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase;
+                   color:var(--z-cream-dim); white-space:nowrap; transition:color 0.5s; }
+
+  /* states */
+  .channel.lit    { --c:var(--z-gold);        --c-hot:var(--z-gold-hot); }
+  .channel.latent { --c:var(--z-teal-latent); --c-hot:var(--z-teal-hot); }
+  .channel.ignited{ --c:var(--z-fire);         --c-hot:var(--z-fire-hot); }
+
+  .channel.lit .fill, .channel.ignited .fill { transform:scaleY(1); opacity:1; }
+  .channel.lit .core, .channel.ignited .core { height:78%; opacity:0.85; }
+  .channel.lit .bloom, .channel.ignited .bloom, .channel.latent .bloom { opacity:1; }
+  .channel.latent .vessel { border-color:rgba(55,196,196,0.5); box-shadow:0 0 26px rgba(42,106,154,0.4) inset; }
+  .channel.latent .bloom { opacity:0.55; }
+  .channel.lit .name    { color:var(--z-gold-hot); }
+  .channel.latent .name { color:var(--z-teal-hot); }
+  .channel.ignited .name{ color:var(--z-fire-hot); }
+
+  @keyframes breathe { 0%,100%{ opacity:0.72; transform:translateX(-50%) scale(0.97);} 50%{ opacity:1; transform:translateX(-50%) scale(1.05);} }
+  #stage.playing .channel.lit .bloom, #stage.playing .channel.ignited .bloom { animation:breathe var(--z-breath) ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce){ #stage.playing .channel .bloom{ animation:none; } .channel .fill{ transition:none; } }
+
+  /* ---- interaction: type + dark-glass set into the field, no centred card ---- */
+  .drop { display:block; border:1.5px dashed var(--z-line); border-radius:16px 15px 17px 14px;
+          padding:clamp(20px,5vw,36px); text-align:center; cursor:pointer; transition:border-color .18s, background .18s;
+          background:rgba(7,8,19,0.28); }
+  .drop.hover { border-color:var(--z-fire); background:rgba(224,67,30,0.06); }
+  .drop input { display:none; }
+  .drop .big { font-family:var(--z-display); font-size:clamp(1rem,3vw,1.3rem); color:var(--z-cream); }
+  .drop .sm { font-size:0.76rem; color:var(--z-cream-dim); margin-top:8px; }
+  .drop code { color:var(--z-teal-hot); }
+
+  .panel { background:var(--z-ink-glass); border:1px solid var(--z-line); border-radius:14px 13px 15px 12px;
+           padding:clamp(16px,3vw,22px); backdrop-filter:blur(6px); display:flex; flex-direction:column; gap:14px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  input[type=text]{ flex:1 1 240px; min-width:0; padding:12px 14px; border-radius:10px; border:1px solid var(--z-line);
+                    background:rgba(0,0,0,0.28); color:var(--z-cream); font-family:var(--z-mono); font-size:0.86rem; letter-spacing:0.02em; }
+  input[type=text]::placeholder{ color:rgba(176,168,156,0.7); }
+  button { font-family:var(--z-mono); font-size:0.84rem; letter-spacing:0.06em; padding:12px 20px; border:0; border-radius:11px 10px 12px 9px;
+           cursor:pointer; color:var(--z-night-root); background:linear-gradient(160deg,var(--z-gold-hot),var(--z-gold)); font-weight:700; transition:transform .1s, filter .2s; }
+  button:hover:not(:disabled){ filter:brightness(1.08); }
+  button:active:not(:disabled){ transform:translateY(1px); }
+  button.ghost { background:transparent; color:var(--z-cream); border:1px solid var(--z-line); font-weight:400; }
+  button.fire { background:linear-gradient(160deg,var(--z-fire-hot),var(--z-fire)); color:#fff; }
+  button:disabled { opacity:0.38; cursor:not-allowed; }
+  .passon { font-family:var(--z-mono); font-size:0.82rem; line-height:1.75; color:var(--z-gold-hot);
+            letter-spacing:0.04em; padding:2px 2px 4px; word-spacing:2px; }
+  .info { font-size:0.82rem; line-height:1.5; color:var(--z-cream-dim); }
+  .err { font-size:0.82rem; color:var(--z-fire-hot); min-height:1em; }
+
+  .honest { border-left:3px solid var(--z-fire); padding:12px 16px; font-size:0.8rem; line-height:1.6; color:var(--z-cream-dim); }
+  .honest b { color:var(--z-cream); font-weight:400; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Zariia">
+      <defs>
+        <linearGradient id="zk-ground" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0f2e"/><stop offset="0.62" stop-color="#0b0a20"/><stop offset="1" stop-color="#1a0d10"/></linearGradient>
+        <radialGradient id="zk-cob" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#1c3aa0" stop-opacity="0.4"/><stop offset="1" stop-color="#1c3aa0" stop-opacity="0"/></radialGradient>
+        <radialGradient id="zk-bloom" cx="0.5" cy="0.38" r="0.62"><stop offset="0" stop-color="#ffc24a" stop-opacity="0.75"/><stop offset="0.6" stop-color="#f5a81f" stop-opacity="0.3"/><stop offset="1" stop-color="#f5a81f" stop-opacity="0"/></radialGradient>
+        <linearGradient id="zk-gold" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#ffeab0"/><stop offset="0.5" stop-color="#ffcb52"/><stop offset="1" stop-color="#f4a828"/></linearGradient>
+        <radialGradient id="zk-ap" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff2d6"/><stop offset="0.5" stop-color="#ff8a3a"/><stop offset="1" stop-color="#c0401a"/></radialGradient>
+        <filter id="zk-soft" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="3"/></filter>
+        <clipPath id="zk-tile"><rect x="0" y="0" width="120" height="120" rx="26"/></clipPath>
+      </defs>
+      <g clip-path="url(#zk-tile)">
+        <rect width="120" height="120" fill="url(#zk-ground)"/><rect width="120" height="120" fill="url(#zk-cob)"/>
+        <g fill="#f4ece0" opacity="0.45"><circle cx="26" cy="26" r="1"/><circle cx="96" cy="30" r="1.1"/><circle cx="90" cy="94" r="0.9"/></g>
+        <rect width="120" height="120" fill="url(#zk-bloom)"/>
+        <g filter="url(#zk-soft)" opacity="0.85">
+          <circle cx="60" cy="41" r="20" fill="url(#zk-gold)"/>
+          <rect x="55.5" y="56" width="9" height="40" rx="4.5" fill="url(#zk-gold)"/>
+          <path d="M59 90 q3.5 -7 7 0 t7 0 t7 0" fill="none" stroke="url(#zk-gold)" stroke-width="6.5" stroke-linecap="round"/>
+        </g>
+        <circle cx="60" cy="41" r="20.5" fill="url(#zk-gold)"/>
+        <circle cx="60" cy="41" r="10.5" fill="url(#zk-ap)"/>
+        <rect x="56.5" y="57" width="7" height="37" rx="3.5" fill="url(#zk-gold)"/>
+        <path d="M59 90 q3.5 -7 7 0 t7 0 t7 0" fill="none" stroke="url(#zk-gold)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="60" cy="41" r="15" fill="none" stroke="#fff3d0" stroke-width="2.4" opacity="0.95"/>
+        <path d="M46 30 a20.5 20.5 0 0 1 20 -9" fill="none" stroke="#fff6e0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+        <rect x="57.8" y="59" width="2.8" height="31" rx="1.4" fill="#fff6e0" opacity="0.9"/>
+        <path d="M59 90 q3.5 -7 7 0 t7 0 t7 0" fill="none" stroke="#fff6e0" stroke-width="1.6" stroke-linecap="round" opacity="0.6"/>
+      </g>
+    </svg></div>
+    <div>
+      <div class="wm">Zariia</div>
+      <div class="tag">Open music · keyed truths</div>
+    </div>
+  </header>
+
+  <div class="lede">A song plays for anyone. Hold the key, and a second channel fills with light — the complete work, in sync.</div>
+
+  <div id="stage">
+    <div class="channel" id="chOpen"><div class="vessel"><div class="fill"></div><div class="core"></div></div><div class="bloom"></div><div class="name">the song</div></div>
+    <div class="channel" id="chSealed"><div class="vessel"><div class="fill"></div><div class="core"></div></div><div class="bloom"></div><div class="name">sealed channel</div></div>
+  </div>
+
+  <label class="drop" id="drop">
+    <input type="file" id="file" accept=".flac,audio/flac" />
+    <div class="big">Drop a Zariia file here, or tap to choose.</div>
+    <div class="sm" id="dropText">A downloaded <code>.flac</code> — not a stream.</div>
+  </label>
+
+  <div class="panel" id="controls" hidden>
+    <div class="row">
+      <button id="play">Play the song</button>
+      <button id="stop" class="ghost" disabled>Stop</button>
+    </div>
+    <div class="row" id="keyRow" hidden>
+      <input type="text" id="key" placeholder="paste the key (word-word-word…) — or hex" autocomplete="off" spellcheck="false" />
+      <button id="unlock" class="fire">Unlock</button>
+    </div>
+    <div class="row" id="passonRow" hidden>
+      <button id="passonBtn" class="ghost">Show the key, to pass on ▸</button>
+    </div>
+    <div class="passon" id="passon" hidden></div>
+    <div class="info" id="info"></div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div class="honest">
+    <b>This object is not covert.</b> That a sealed channel is present is openly visible in the file — you can see its
+    empty vessel above. Only its content is locked, by the key; nothing here hides from anyone, and nothing here is
+    checked. The complete work lives only in this exact downloaded file — a stream is re-encoded and carries just the open song.
+  </div>
+
+<script type="module">
+import { extract, hasSealedChannel } from '../src/zariia-flac.mjs';
+import { unseal, KEYMODE, hexToKey } from '../src/zariia-crypto.mjs';
+import { readBundle, ENTRY, CODEC } from '../src/zariia-bundle.mjs';
+import { deserializeMimi } from '../src/mimi-codec.mjs';
+import { parseKey, keyToMnemonic } from '../src/zariia-key.mjs';
+
+// The neural decoder for the Mimi sealed channel. Loaded in-page and cached — NEVER an
+// point). Decoder-only (~88 MB q8); first load fetches it, then a service worker serves
+// sealed channel that stays ~15x smaller than Opus.
+const TF_CDN = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0';
+const MIMI_REPO = 'onnx-community/kyutai-mimi-ONNX';
+let _mimiDec = null, _tf = null;
+async function mimiDecoder(){
+  if (_mimiDec) return _mimiDec;
+  _tf = await import(TF_CDN);
+  _tf.env.allowLocalModels = false;
+  _mimiDec = await _tf.MimiDecoderModel.from_pretrained(MIMI_REPO, { dtype: 'q8' });
+  return _mimiDec;
+}
+
+/** Decode an AUDIO bundle entry to an AudioBuffer, by codec. */
+async function decodeSecond(audio){
+  if (audio.codec === CODEC.MIMI){
+    say('Loading the neural decoder — first time fetches ~88 MB, then it is cached offline…');
+    const dec = await mimiDecoder();
+    const { sampleRate, nCodebooks, nFrames, values } = deserializeMimi(audio.bytes);
+    const big = new BigInt64Array(values.length);
+    for (let i = 0; i < values.length; i++) big[i] = BigInt(values[i]);
+    const codes = new _tf.Tensor('int64', big, [1, nCodebooks, nFrames]);
+    const { audio_values } = await dec({ audio_codes: codes });
+    const f32 = Float32Array.from(audio_values.data);
+    const ab = ctx().createBuffer(1, f32.length, sampleRate);
+    ab.copyToChannel(f32, 0);
+    return ab;
+  }
+  // Opus / FLAC / MP3 — native Web Audio.
+  return await ctx().decodeAudioData(audio.bytes.slice().buffer);
+}
+
+const $ = (id) => document.getElementById(id);
+const stage = $('stage'), chOpen = $('chOpen'), chSealed = $('chSealed');
+const drop = $('drop'), fileInput = $('file');
+let audioCtx = null, fileBytes = null, sealedBlob = null;
+let openBuf = null, secondBuf = null, sources = [], playing = false;
+
+function ctx(){ audioCtx ||= new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function say(m){ $('info').textContent = m; }
+function fail(m){ $('err').textContent = m; }
+
+['dragover','dragenter'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add('hover'); }));
+['dragleave','drop'].forEach(e => drop.addEventListener(e, () => drop.classList.remove('hover')));
+drop.addEventListener('drop', ev => { ev.preventDefault(); if (ev.dataTransfer.files[0]) loadFile(ev.dataTransfer.files[0]); });
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) loadFile(fileInput.files[0]); });
+
+async function loadFile(file){
+  fail(''); say(''); stop(); secondBuf = null;
+  chOpen.className = 'channel'; chSealed.className = 'channel';
+  $('keyRow').hidden = true; $('passonRow').hidden = true; $('passon').hidden = true; passKey = null;
+  fileBytes = new Uint8Array(await file.arrayBuffer());
+  $('dropText').innerHTML = `Loaded <code>${file.name}</code> — ${(fileBytes.length/1024).toFixed(0)} KB`;
+  $('controls').hidden = false;
+
+  try {
+    openBuf = await ctx().decodeAudioData(fileBytes.slice().buffer);
+    chOpen.classList.add('lit');            // the open song lights
+    $('play').disabled = false;
+  } catch {
+    $('play').disabled = true;
+    fail('This browser could not decode the open track. Try a current Chrome or Firefox.');
+  }
+
+  const present = hasSealedChannel(fileBytes);
+  if (present){
+    sealedBlob = extract(fileBytes);
+    chSealed.classList.add('latent');        // the sealed vessel appears — cold, present, locked
+    $('keyRow').hidden = false;
+    say(`A sealed channel is present (${(sealedBlob.length/1024).toFixed(1)} KB). Hold the key to fill it.`);
+  } else {
+    say('No sealed channel — this is just the open song.');
+  }
+}
+
+let passKey = null;  // raw key of the current drop, for pass-on — never stored
+$('unlock').addEventListener('click', async () => {
+  fail('');
+  const raw = $('key').value.trim();
+  if (!raw) return;
+  // A key is 24 words (checksummed) or 64 hex; anything else is treated as a passphrase.
+  let keySpec;
+  try {
+    const parsed = await parseKey(raw);
+    keySpec = parsed ? { mode:KEYMODE.RAW, rawKey:parsed.key } : { mode:KEYMODE.PASSPHRASE_PBKDF2, passphrase:raw };
+  } catch (e) { fail(e.message); return; }  // e.g. 24 words but the checksum fails
+  try {
+    const plaintext = await unseal(sealedBlob, keySpec);
+    const entries = readBundle(plaintext);
+    const audio = entries.find(e => e.type === ENTRY.AUDIO);
+    if (!audio) throw new Error('no audio');
+    secondBuf = await decodeSecond(audio);
+    chSealed.classList.remove('latent');
+    chSealed.classList.add('ignited');       // vermilion light rises into the vessel
+    say('Unlocked. Press play for the complete work — both channels in sync.');
+    passKey = keySpec.mode === KEYMODE.RAW ? keySpec.rawKey : null;
+    $('passonRow').hidden = !passKey;        // only word/hex keys have words to pass on
+    $('passon').hidden = true; $('passonBtn').textContent = 'Show the key, to pass on ▸';
+    if (playing){ stop(); play(); }
+  } catch {
+    chSealed.classList.remove('ignited'); chSealed.classList.add('latent'); secondBuf = null;
+    fail('That key did not open it. Wrong key, or this is not a Zariia drop.');
+  }
+});
+
+$('passonBtn').addEventListener('click', async () => {
+  const el = $('passon');
+  if (el.hidden && passKey) {
+    el.textContent = await keyToMnemonic(passKey);
+    el.hidden = false; $('passonBtn').textContent = 'Hide the key ▾';
+  } else {
+    el.hidden = true; $('passonBtn').textContent = 'Show the key, to pass on ▸';
+  }
+});
+
+function play(){
+  const c = ctx(); if (c.state === 'suspended') c.resume();
+  const t0 = c.currentTime + 0.08; sources = [];
+  const start = (buf) => { const s = c.createBufferSource(); s.buffer = buf; s.connect(c.destination); s.start(t0); sources.push(s); };
+  start(openBuf);
+  if (secondBuf) start(secondBuf);
+  sources[0].onended = () => { if (playing) stop(); };
+  playing = true; stage.classList.add('playing');
+  $('play').disabled = true; $('stop').disabled = false;
+}
+function stop(){
+  sources.forEach(s => { try { s.stop(); } catch {} });
+  sources = []; playing = false; stage.classList.remove('playing');
+  $('play').disabled = !openBuf; $('stop').disabled = true;
+}
+$('play').addEventListener('click', play);
+$('stop').addEventListener('click', stop);
+</script>
+</body>
+</html>

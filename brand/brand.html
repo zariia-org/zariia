@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zariia — brand sheet</title>
+<!--
+  Rebuilt 26 July 2026 to match the live identity. The previous sheet survived a chord
+  change and a mark redraw and described neither: it still showed the retired glowing gold
+  key and ten hardcoded indigo hexes, while brand.md told the reader "look at this".
+  Everything here now reads from palette.css. Do not hardcode a colour on this page —
+  a brand sheet that can drift from its own palette is worse than no brand sheet.
+-->
+<link rel="icon" href="zariia-symbol.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Antic+Didone&family=Cutive+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="palette.css">
+<style>
+  :root{
+    --meander:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='18' viewBox='0 0 34 18'%3E%3Cg fill='none' stroke='%23e0ae5c' stroke-width='1' stroke-linecap='square'%3E%3Cpath d='M0 17h34'/%3E%3Cpath d='M4 17V4h13v9H9V8h4'/%3E%3Cpath d='M21 17V4h13'/%3E%3C/g%3E%3C/svg%3E");
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--z-fired);color:var(--z-slip);font-family:var(--z-display);
+    font-size:18px;line-height:1.7;position:relative;overflow-x:hidden}
+  .ground{position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(104% 62% at 78% 4%, rgba(180,82,42,.15), transparent 58%),
+      radial-gradient(90% 62% at 10% 96%, rgba(28,90,110,.20), transparent 64%),
+      linear-gradient(178deg,#24120b 0%,var(--z-fired) 44%,var(--z-slip-black) 100%)}
+  .ground::before{content:"";position:absolute;inset:0;opacity:.5;
+    background:repeating-linear-gradient(180deg,rgba(234,223,203,.03) 0 1px,transparent 1px 7px)}
+  .ground::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(122% 92% at 50% 38%,transparent 40%,rgba(0,0,0,.5) 100%)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,64px) 90px}
+
+  .lockup{display:flex;align-items:center;gap:clamp(20px,3vw,36px);padding:clamp(50px,9vh,110px) 0 40px}
+  .lockup img{width:clamp(84px,10vw,118px);height:auto;flex:none}
+  .wordmark{font-size:clamp(52px,9vw,104px);line-height:.95;letter-spacing:.04em;color:var(--z-gold-hi)}
+  .tag{font-family:var(--z-mono);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--z-terra-hi);margin-top:12px}
+
+  section{padding:44px 0;position:relative}
+  section+section::before{content:"";position:absolute;top:0;left:0;width:min(300px,52%);
+    height:18px;opacity:.24;background-image:var(--meander);background-repeat:repeat-x;background-size:34px 18px}
+  h2{font-size:11px;font-family:var(--z-mono);letter-spacing:.26em;text-transform:uppercase;
+    color:var(--z-zellij-hi);font-weight:400;margin-bottom:18px}
+  h3{font-family:var(--z-display);font-weight:400;font-size:clamp(24px,3vw,36px);
+    color:var(--z-slip);margin-bottom:16px;line-height:1.15}
+  p{max-width:60ch;margin-bottom:16px;color:rgba(234,223,203,.88)}
+  p.mono{font-family:var(--z-mono);font-size:13px;line-height:1.8;color:var(--z-slip-dim);max-width:70ch}
+  em{font-style:italic;color:var(--z-terra-hi)}
+  strong{font-weight:400;color:var(--z-gold-hi)}
+  code{font-family:var(--z-mono);font-size:.86em;color:var(--z-gold)}
+
+  .star{display:inline-block;width:12px;height:12px;margin-right:10px;vertical-align:-1px;
+    background:var(--z-gold);opacity:.85;
+    clip-path:polygon(50% 0%,61% 26%,87% 15%,76% 40%,100% 50%,76% 60%,87% 85%,61% 74%,50% 100%,39% 74%,13% 85%,24% 60%,0% 50%,24% 40%,13% 15%,39% 26%)}
+
+  .chord{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px;margin-top:20px}
+  .sw{aspect-ratio:1.5;border:1px solid rgba(234,223,203,.10);padding:14px;
+    display:flex;flex-direction:column;justify-content:flex-end}
+  .sw b{font-family:var(--z-mono);font-size:11px;font-weight:400;letter-spacing:.05em;display:block}
+  .sw span{font-family:var(--z-mono);font-size:10.5px;opacity:.72}
+  .on-dark b,.on-dark span{color:var(--z-slip)}
+  .on-light b,.on-light span{color:#241309}
+
+  .type{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:18px}
+  @media(max-width:760px){.type{grid-template-columns:1fr}}
+  .spec{border:1px solid rgba(234,223,203,.10);border-top:1px solid rgba(224,174,92,.30);padding:26px}
+  .spec .big{font-size:46px;line-height:1.1;color:var(--z-gold-hi);margin-bottom:8px}
+  .spec .big.m{font-family:var(--z-mono);font-size:26px;color:var(--z-zellij-hi)}
+  .spec .lbl{font-family:var(--z-mono);font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--z-slip-dim);margin-top:12px}
+
+  .orn{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+  .orn div{border:1px solid rgba(234,223,203,.10);padding:22px}
+  .meanderbar{height:18px;background-image:var(--meander);background-repeat:repeat-x;
+    background-size:34px 18px;opacity:.55;margin-bottom:14px}
+  .nest{position:relative;height:78px;border:1px solid rgba(38,74,90,.55);
+    background:rgba(13,7,5,.42);margin-bottom:14px;
+    box-shadow:inset 0 0 0 7px rgba(38,74,90,.34), inset 0 0 0 15px rgba(38,74,90,.20)}
+
+  ul{margin:0 0 16px 0}
+  li{list-style:none;position:relative;padding:9px 0 9px 26px;max-width:66ch}
+  li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:9px;background:var(--z-gold);opacity:.75;
+    clip-path:polygon(50% 0%,61% 26%,87% 15%,76% 40%,100% 50%,76% 60%,87% 85%,61% 74%,50% 100%,39% 74%,13% 85%,24% 60%,0% 50%,24% 40%,13% 15%,39% 26%)}
+  .no li::before{background:var(--z-terra)}
+</style>
+</head>
+<body>
+<div class="ground"></div>
+<div class="wrap">
+
+  <header class="lockup">
+    <img src="zariia-symbol.svg" alt="Zariia">
+    <div>
+      <div class="wordmark">Zariia</div>
+      <div class="tag">Open music · keyed truths</div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="star"></span>the mark</h2>
+    <h3>A key, standing.</h3>
+    <p>Three concepts in one mark. The <strong>bow is a ring holding a lit aperture</strong> — the
+    keyed truth, revealed; the key <em>is</em> the opening, not a lock and not a padlock. The
+    <strong>bit is a waveform</strong>, the music. And it <strong>stands on a ground line rather
+    than floating</strong>, which is where the stability comes from.</p>
+    <p>Drawn as a fine line rather than a gold mass, on a fired-clay field, vignetted so the dark
+    has distance in it instead of sitting flat. One warm light, held — no bloom, no neon, no
+    scattered stars.</p>
+    <p class="mono">Two traps recorded in the file. The shank is a vertical <code>&lt;line&gt;</code>,
+    whose bounding box has zero width — an objectBoundingBox gradient on its stroke degenerates and
+    the shank <em>vanishes silently</em>, leaving a mark that reads as a lamp. It uses
+    <code>gradientUnits="userSpaceOnUse"</code> for that reason. And the field must stay fired clay:
+    an indigo tile reads as a foreign blue square on every surface the brand now uses.</p>
+  </section>
+
+  <section>
+    <h2><span class="star"></span>the chord — fired earthenware</h2>
+    <h3>Terracotta is the body, not an accent.</h3>
+    <p>From four sources that are one idea — Moroccan zellij and pierced lanterns, Kutchi
+    earthenware, Greek pottery, the matryoshka. All of them are <strong>vessels carrying banded
+    decoration</strong>, and each opens or lets light through.</p>
+    <div class="chord">
+      <div class="sw on-dark" style="background:var(--z-clay)"><b>Clay body</b><span>--z-clay</span></div>
+      <div class="sw on-dark" style="background:var(--z-fired)"><b>Fired dark</b><span>--z-fired</span></div>
+      <div class="sw on-dark" style="background:var(--z-slip-black)"><b>Black slip</b><span>--z-slip-black</span></div>
+      <div class="sw on-light" style="background:var(--z-gold)"><b>The open song</b><span>--z-gold</span></div>
+      <div class="sw on-light" style="background:var(--z-gold-hi)"><b>Gold, high</b><span>--z-gold-hi</span></div>
+      <div class="sw on-dark" style="background:var(--z-terra)"><b>Sealed · alight</b><span>--z-terra</span></div>
+      <div class="sw on-dark" style="background:var(--z-terra-deep)"><b>Terracotta deep</b><span>--z-terra-deep</span></div>
+      <div class="sw on-dark" style="background:var(--z-zellij)"><b>Counter-voice</b><span>--z-zellij</span></div>
+      <div class="sw on-dark" style="background:var(--z-latent)"><b>Sealed · locked</b><span>--z-latent</span></div>
+      <div class="sw on-light" style="background:var(--z-slip)"><b>Bone slip · text</b><span>--z-slip</span></div>
+    </div>
+    <p class="mono" style="margin-top:18px">Gold is the open song. Terracotta is the sealed channel
+    alight, and it arrives as a <em>mass</em>, never a line. Zellij blue-teal is the cold latent
+    state and the machinery. Sober: colour glows, nothing flares, nothing pulses. Never sRGB white.
+    Never <code>#000</code>.</p>
+  </section>
+
+  <section>
+    <h2><span class="star"></span>type</h2>
+    <div class="type">
+      <div class="spec">
+        <div class="big">Zariia</div>
+        <div class="big" style="font-size:26px;color:var(--z-slip)">Presence open, content keyed.</div>
+        <div class="lbl">Antic Didone — display <em>and</em> running prose</div>
+      </div>
+      <div class="spec">
+        <div class="big m">01 — THE OBJECT</div>
+        <div class="big m" style="font-size:15px">paste the key — 12 words</div>
+        <div class="lbl">Cutive Mono — machinery only</div>
+      </div>
+    </div>
+    <p class="mono" style="margin-top:18px">Mono is for labels, the key field, colophons —
+    <strong>never paragraphs</strong>. Setting body copy in mono made the label read as a terminal;
+    that was caught on render, not in the code. Antic Didone is thin by stroke <em>contrast</em>
+    rather than a weight axis, which keeps it warm where a hairline sans goes cold. Never geometric
+    sans, including the thin ones (Poppins, Jost, Montserrat, Josefin). Never Fraunces — that is
+    Koher's face.</p>
+  </section>
+
+  <section>
+    <h2><span class="star"></span>the ornaments</h2>
+    <div class="orn">
+      <div>
+        <div class="meanderbar"></div>
+        <b style="font-family:var(--z-mono);font-size:12px;color:var(--z-gold)">THE MEANDER</b>
+        <p class="mono" style="margin-top:8px">Rules the horizontal registers apart, as on a pot.
+        Ornament and namesake at once. Keep it a <em>rule</em>, never a band — it shipped once
+        full-bleed and loud, and read as a shouting stripe.</p>
+      </div>
+      <div>
+        <div class="nest"></div>
+        <b style="font-family:var(--z-mono);font-size:12px;color:var(--z-gold)">NESTING</b>
+        <p class="mono" style="margin-top:8px">Sealed matter is a frame inside a frame inside a
+        frame, innermost unlit — matryoshka. One thing inside another is what a release <em>is</em>,
+        so sealed content is never a flat panel.</p>
+      </div>
+      <div>
+        <div style="height:78px;display:flex;align-items:center;gap:14px;margin-bottom:14px">
+          <span class="star" style="width:30px;height:30px;margin:0"></span>
+          <span class="star" style="width:18px;height:18px;margin:0"></span>
+          <span class="star" style="width:12px;height:12px;margin:0"></span>
+        </div>
+        <b style="font-family:var(--z-mono);font-size:12px;color:var(--z-gold)">ZELLIJ STAR</b>
+        <p class="mono" style="margin-top:8px">Section marker and list bullet. Eight points, from
+        Moroccan tilework.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="star"></span>usage — the lines the brand must not cross</h2>
+    <p class="mono">The Zariia description of itself is legal evidence. The brand voice is bound,
+    not free.</p>
+    <ul>
+      <li><strong>Presence open, content keyed.</strong> Say plainly what the object is. Never let
+      copy or imagery imply it hides, evades or defeats anyone — covertness would be both false and
+      self-incriminating.</li>
+      <li><strong>One identity per screen.</strong> On the home page the masthead carries mark and
+      wordmark, so the navigation carries links only. Elsewhere the navigation carries the lockup,
+      because there it is the way back. Never both.</li>
+      <li><strong>The music is real and avowable.</strong> A music label, authored and scene-based —
+      not a security product. Warmth, not secrecy.</li>
+    </ul>
+    <ul class="no">
+      <li><strong>No authority markers, ever.</strong> No badges, ticks, verification marks or
+      official styling. Even the label signature — which does prove origin — must be reported as a
+      harm the people it serves.</li>
+      <li><strong>No Koher elements.</strong> No braid, no Q/R/L, no Fraunces. Standalone so a
+      notice attaches here, not there.</li>
+      <li><strong>Do not flatten the medium.</strong> No solid fills where there is a wash; the
+      vignette is what gives the dark depth.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="mono">This sheet, <code>brand.md</code>, <code>palette.css</code> and
+    <code>../website/zariia.css</code> are in sync as of 26 July 2026. Change one, change all four.</p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.env
+node_modules/
+*.flac
+*.opus
+*.ecdc
+.DS_Store
+/tmp/
+SAMPLE-KEY.txt

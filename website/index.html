@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zariia — open music, keyed truths</title>
+<meta name="description" content="A label for music carrying a sealed second channel. The track plays for anyone and sounds whole; the key completes it. No releases yet.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zariia">
+<meta property="og:title" content="Zariia — open music, keyed truths">
+<meta property="og:description" content="A track plays for anyone and sounds whole. The key unlocks a second channel that plays in sync.">
+<meta property="og:url" content="https://zariia.org/">
+<meta property="og:image" content="https://zariia.org/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Zariia mark — a key standing on a ground line — beside the wordmark, with the sealed channel drawn as nested frames.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://zariia.org/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-source.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#150c07">
+<link rel="stylesheet" href="fonts.css?v=20260728a">
+<link rel="stylesheet" href="zariia.css?v=20260728a">
+<style>
+/* the masthead occupies exactly the viewport MINUS the nav, so no part of the
+   next register is visible above the fold. svh, not vh, so mobile browser
+   chrome does not push the next section into view.
+
+   Capped at 860px: at a 1400px+ viewport the old uncapped rule left roughly
+   40% of the first screen as empty brown above the mark, because the content
+   centres inside whatever height it is given. (27 July 2026.) */
+header.top{min-height:min(calc(100svh - 76px),860px);display:flex;flex-direction:column;
+  justify-content:center;
+  padding:clamp(30px,5vh,72px) 0 clamp(36px,6vh,72px);position:relative}
+@supports not (height:100svh){header.top{min-height:min(calc(100vh - 76px),860px)}}
+/* A single lamp burning in a large dark room, breaking out of the wrap to full
+   bleed. The upper region of the masthead used to be void; now it is the
+   subject. Content sits above it and the scrim keeps the type off the image. */
+header.top::before{content:"";position:absolute;top:-76px;bottom:0;
+  width:100vw;margin-left:calc(50% - 50vw);z-index:-1;
+  background:url('img/ground-lamp.jpg') 72% 42% / cover no-repeat}
+/* One scrim, not two stacked — the first pass multiplied a .94 and a .72 layer
+   and the lamp disappeared entirely, which defeats the point of putting a
+   photograph there. Heavy over the left half where the type sits, and it lets go
+   across the right half where the flame is. */
+header.top::after{content:"";position:absolute;top:-76px;bottom:0;
+  width:100vw;margin-left:calc(50% - 50vw);z-index:-1;
+  background:
+    linear-gradient(100deg,rgba(13,7,5,.94) 0%,rgba(13,7,5,.86) 30%,
+      rgba(13,7,5,.34) 62%,rgba(13,7,5,.10) 100%),
+    linear-gradient(180deg,rgba(13,7,5,.50) 0%,transparent 26%,
+      transparent 64%,var(--fired) 100%)}
+header.top > *{position:relative;z-index:1}
+.mark{width:clamp(78px,8vw,104px);height:auto;display:block;margin-bottom:clamp(30px,4.5vh,54px)}
+.tagline{font-family:var(--display);font-size:clamp(19px,2.3vw,27px);color:var(--terra-hi);
+  margin-top:14px;letter-spacing:.03em}
+.opening{margin-top:clamp(28px,4vh,52px);max-width:52ch}
+.scrollcue{margin-top:clamp(30px,5vh,62px);font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--slip-dim);display:flex;align-items:center;gap:14px}
+.scrollcue::after{content:"";width:64px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent)}
+.drip{position:absolute;right:clamp(60px,16vw,230px);bottom:0;width:1px;
+  height:clamp(84px,14vh,168px);
+  background:linear-gradient(180deg,rgba(224,174,92,.55) 0%,rgba(224,174,92,.10) 70%,transparent 100%)}
+
+/* ── the rooms: onward routes as lit openings, not a menu ── */
+.rooms{display:grid;grid-template-columns:repeat(6,1fr);
+  gap:clamp(14px,2vw,22px);margin-top:38px}
+.room{display:block;border:1px solid var(--rule);border-top:1px solid rgba(224,174,92,.20);background:rgba(21,12,7,.34);
+  padding:clamp(22px,2.6vw,32px);position:relative;overflow:hidden;
+  transition:border-color 1s var(--ease),background 1s var(--ease);}
+.room::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 70% at 26% 0%, rgba(224,174,92,.13), transparent 70%);
+  opacity:0;transition:opacity 1.2s var(--ease)}
+.room:hover{border-top-color:rgba(224,174,92,.55);background:rgba(12,10,24,.46)}
+.room:hover::before{opacity:1}
+.room .n{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--zellij-hi);display:block;margin-bottom:12px}
+.room h3{font-size:clamp(23px,2.4vw,29px);margin:0 0 8px}
+/* was 12.6px mono in the dimmest tan — the smallest, faintest text on the page,
+   carrying the description of every route into the site */
+.room p{font-family:var(--text);font-size:16.5px;line-height:1.6;margin:0;
+  color:rgba(234,223,203,.78);max-width:none}
+.room{grid-column:span 2}
+/* six rooms, two rows of three */
+@media(max-width:820px){.room,.room:nth-child(4),.room:nth-child(5){grid-column:span 6}}
+.room.hot{border-color:rgba(212,112,60,.42)}
+.room.hot .n{color:var(--terra-hi)}
+.room.hot::before{background:radial-gradient(46% 52% at 30% 0%, rgba(212,112,60,.22), transparent 68%)}
+/* On a narrow screen the fixed masthead height left ~380px of empty ground under
+   "Read on". Let it size to its content there. */
+@media(max-width:820px){
+  header.top{min-height:auto;padding-bottom:clamp(64px,13vh,120px)}
+}
+</style>
+</head>
+<body>
+
+<div class="ground"></div><div class="wash"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .07 0"/></filter>
+  <rect width="100%" height="100%" filter="url(#g)"/></svg>
+
+<div class="wrap">
+
+<nav class="top">
+  <span class="sp"></span>
+  <a href="the-object.html">The object</a>
+  <a href="the-name.html">The name</a>
+  <a href="historicising.html">History</a>
+  <a href="curatorial.html">The rooms</a>
+  <a href="artists.html">Artists</a>
+  <a href="releases.html">Releases</a>
+  <a href="player.html">Player</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<header class="top">
+  <img class="mark" src="zariia-symbol.svg" alt="Zariia">
+
+  <h1>Zariia</h1>
+  <div class="tagline">Open music&nbsp;·&nbsp;keyed truths</div>
+  <div class="opening">
+    <p class="lede">A track plays for anyone and sounds whole. Held with the key, a second channel
+    unlocks and plays in sync. What you hear then is the complete work.</p>
+  </div>
+  <div class="scrollcue">Read on</div>
+  <div class="drip"></div>
+</header>
+
+<!-- ═══ WHAT IT IS ═══ -->
+<section id="what">
+  <div class="bay">
+    <div class="rise">
+      <span class="label"><span class="star"></span>01 — what this is</span>
+      <h2>A label, a format, and no releases yet.</h2>
+      <p>Zariia is a label for music that carries a sealed second channel. The open track will be a
+      real song — whole, free, worth hearing on its own terms. The key opens the complete one.
+      Nothing has been released yet, and <a href="releases.html">Releases</a> says so plainly.</p>
+      <p>The sealed channel is <em>encrypted, not buried</em>. Anyone inspecting the file can see it
+      is there. That is intended. What the key protects is the hearing, and the key passes from
+      person to person rather than from a server.</p>
+      <p><strong>Presence open. Content keyed.</strong></p>
+    </div>
+    <div class="sealed rise">
+      <span class="label cold">sealed — present, unlit</span>
+      <p class="quiet">A block sitting in plain view in the file, legible as a block, saying nothing
+      at all about what is inside it.</p>
+      <p class="quiet">Nothing here hides. The lock is the whole mechanism, and the lock is
+      visible.</p>
+    </div>
+  </div>
+
+<figure class="fig-wide" style="margin-top:52px">
+  <svg viewBox="0 0 900 340" role="img" aria-labelledby="ftv">
+    <title id="ftv">One file carrying two registers: the open track and the sealed channel</title>
+    <defs>
+      <!-- the vessel body, used both as outline and as a CLIP so the sealed
+           register can only ever be painted inside it -->
+      <path id="vbody" d="M74 46 C44 82 30 124 30 168 C30 232 76 282 132 282
+                          C188 282 234 232 234 168 C234 124 220 82 190 46 Z"/>
+      <clipPath id="vclip"><use href="#vbody"/></clipPath>
+    </defs>
+    <g transform="translate(40,10)">
+      <!-- neck -->
+      <path d="M74 46 h116" class="f-line" stroke-width="1.8"/>
+      <!-- body outline -->
+      <use href="#vbody" class="f-line" stroke-width="1.8"/>
+      <!-- everything below is clipped to the body -->
+      <g clip-path="url(#vclip)">
+        <!-- lower register: sealed, cold, cross-hatched -->
+        <rect x="20" y="176" width="228" height="120" fill="rgba(61,147,166,.24)"/>
+        <g stroke="#3d93a6" stroke-width="1.1" opacity=".5">
+          <path d="M28 300 L96 178"/><path d="M62 302 L130 178"/><path d="M96 304 L164 180"/>
+          <path d="M130 302 L198 180"/><path d="M164 298 L226 190"/>
+        </g>
+      </g>
+      <!-- the waist: a meander rule dividing the registers -->
+      <path d="M32 176 h200" class="f-thin"/>
+      <g class="f-thin" opacity=".9">
+        <path d="M50 176 v-13 h15 v9 h-8 v-5 h4"/><path d="M84 176 v-13 h15 v9 h-8 v-5 h4"/>
+        <path d="M118 176 v-13 h15 v9 h-8 v-5 h4"/><path d="M152 176 v-13 h15 v9 h-8 v-5 h4"/>
+        <path d="M186 176 v-13 h15 v9 h-8 v-5 h4"/>
+      </g>
+      <!-- upper register: the open track, lit -->
+      <path d="M52 118 q15 -19 28 0 t28 0 t28 0 t28 0" class="f-line"/>
+      <text x="0" y="322" class="f-lbl warm">one file</text>
+    </g>
+    <!-- readings -->
+    <g transform="translate(330,10)">
+      <path d="M0 118 h64" class="f-thin"/>
+      <text x="76" y="122" class="f-lbl warm">the open track — plays for anyone</text>
+      <path d="M0 232 h64" class="f-cold"/>
+      <text x="76" y="236" class="f-lbl cold">the sealed channel — present, unlit</text>
+      <g transform="translate(76,268)">
+        <circle cx="14" cy="14" r="12" class="f-line" stroke-width="2"/>
+        <circle cx="14" cy="14" r="5" class="f-mass"/>
+        <path d="M14 26 v24" class="f-line" stroke-width="2"/>
+        <path d="M14 46 h10" class="f-line" stroke-width="2"/>
+        <path d="M44 30 h40" class="f-hot"/><path d="M78 24 l8 6 -8 6" class="f-hot"/>
+        <text x="96" y="34" class="f-lbl hot">both sound together — the complete work</text>
+      </g>
+    </g>
+  </svg>
+  <figcaption>The audio is the open track, byte for byte. The sealed channel rides alongside it in
+  the same file — <b>plainly present and unreadable</b>. Anyone inspecting the file can see it is
+  there; that is intended. What the key protects is the hearing.</figcaption>
+</figure>
+
+<figure class="plate">
+  <img src="img/ground-wire.jpg" alt="Two strings side by side against a black ground. One catches
+  a warm light along its whole length; the second falls almost entirely into shadow." loading="lazy">
+  <figcaption>Two channels, side by side in one object. One of them lit.</figcaption>
+</figure>
+</section>
+
+<!-- ═══ THE ROOMS ═══ -->
+<section id="rooms">
+  <div class="rise">
+    <span class="label"><span class="star"></span>02 — the rooms</span>
+    <h2>Six ways in.</h2>
+  </div>
+  <div class="rooms rise">
+    <a class="room" href="the-object.html"><span class="n">01</span>
+      <h3>The object</h3>
+      <p>How one file carries two channels, why an ordinary player is untroubled by it, and the
+      three states a release lives in.</p></a>
+    <a class="room hot" href="player.html"><span class="n">02</span>
+      <h3>The player</h3>
+      <p>Drop a file and hear it. The open song lights; the sealed vessel stands cold beside it
+      until the key fills it.</p></a>
+    <a class="room" href="the-name.html"><span class="n">03</span>
+      <h3>The name</h3>
+      <p>Zaireeka, a borrowed syllable that outlived its country, and <span class="dev">ज़रिया</span>
+      — the means by which.</p></a>
+    <a class="room" href="historicising.html"><span class="n">04</span>
+      <h3>The history</h3>
+      <p>Programs broadcast on the radio, handsets in rubber cups, twelve radios in 1951. A
+      recapitulation rather than an invention.</p></a>
+    <a class="room" href="curatorial.html"><span class="n">05</span>
+      <h3>The rooms</h3>
+      <p>How the sessions are put together, whom to invite, and the ways an invited room
+      goes wrong.</p></a>
+    <a class="room" href="releases.html"><span class="n">06</span>
+      <h3>Releases</h3>
+      <p>Nothing yet, and said plainly. The carrier works; the music has not been made.</p></a>
+  </div>
+</section>
+
+
+<!-- ═══ THE KEY ═══ -->
+<section id="key">
+  <div class="bay flip">
+    <div class="aperture mass rise" style="--lx:60%;--ly:68%">
+      <span class="label warm">the key</span>
+      <p class="lede" style="margin-bottom:0">The music travels freely. What passes person to
+      person is the key.</p>
+    </div>
+    <div class="rise">
+      <span class="label"><span class="star"></span>03 — what the key opens</span>
+      <h2>Possession is universal. Hearing the whole thing is keyed.</h2>
+      <p>This inverts an older arrangement. Cassette culture gated the object: you got the tape by
+      being in the scene, and once you held it you heard everything. Zariia moves the membrane
+      inward — the object travels completely freely, and the gate sits at the hearing.</p>
+      <p>The nearer relatives are the double-voiced traditions. A language spoken in the open,
+      meaning one thing to the room and another to the person it was for. Nothing is concealed.
+      What is gated is the reading.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE PRETEXT ═══
+     Seated on a photograph of an empty room laid out for a private gathering,
+     before anyone has arrived. That is the honest picture of where the label
+     currently stands: the room is ready and no session has happened. -->
+<section id="pretext" class="band" style="background-image:url('img/ground-room.jpg')">
+  <div class="wrap">
+  <div class="aperture tealed rise" style="--lx:34%;--ly:16%">
+    <span class="label"><span class="star"></span>04 — the pretext</span>
+    <h2>Nobody joins a community. People turn up for a record.</h2>
+    <div class="bay" style="margin-top:12px">
+      <div>
+        <p>Scenes are not founded. They accrete, and what they accrete around is always an
+        occasion — a night, a shop, a label, a song somebody made you listen to. The occasion does
+        the real work, and it only works while nobody treats it as a means to an end. A gathering
+        that announces itself as a gathering repels the people it wants.</p>
+        <p>So the music is the pretext. You come for the song, which is whole and worth the trip on
+        its own terms. Having come, you find there is more of it than you could hear, and that
+        somebody has the key.</p>
+      </div>
+      <div>
+        <p>The discovery that an undercurrent exists, and that it can be entered, is the thing
+        being offered. It cannot be handed over as a proposition. It has to be found.</p>
+        <p class="quiet">This is also what the name says. Said the ordinary way, <em>Zariia</em>
+        lands on <span class="dev">ज़रिया</span> — <em>zariya</em>: the means by which something
+        travels, and the occasion for turning up. <a href="the-name.html">More on the name ▸</a></p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<footer>
+  <div class="bay">
+    <div>
+      <span class="label"><span class="star"></span>Zariia</span>
+      <p class="quiet" style="max-width:46ch">Named after the Flaming Lips record that could only be
+      played by four machines at once, and after <span class="dev">ज़रिया</span> — the means by
+      which.</p>
+    </div>
+    <div class="colophon">
+      <span>Ahmedabad</span>
+    <span><a href="credits.html">Credits</a></span>
+    <span><a href="contact.html">Contact</a></span><span>Antic Didone · EB Garamond · Cutive Mono</span>
+      <span>No trackers, no analytics, no cookies</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+
+</body>
+</html>

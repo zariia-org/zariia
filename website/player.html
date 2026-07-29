@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player — Zariia</title>
+<meta name="description" content="Drop a Zariia file. The open song plays for anyone. With the key, the sealed channel fills and both play in sync.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zariia">
+<meta property="og:title" content="Player — Zariia">
+<meta property="og:description" content="Drop a file and hear it. Everything happens in this page; nothing is uploaded or stored.">
+<meta property="og:url" content="https://zariia.org/player">
+<meta property="og:image" content="https://zariia.org/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Zariia mark — a key standing on a ground line — beside the wordmark, with the sealed channel drawn as nested frames.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://zariia.org/player">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-source.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#150c07">
+<link rel="stylesheet" href="fonts.css?v=20260728a">
+<link rel="stylesheet" href="zariia.css?v=20260728a">
+<style>
+/* the two vessels — the page's working surface, not an illustration */
+.vessels{display:flex;gap:clamp(18px,3vw,44px);align-items:flex-end;
+  height:clamp(190px,30vh,300px);margin:6px 0 28px}
+.vessel{flex:1;position:relative;border:1px solid rgba(244,236,224,.16);border-radius:3px;
+  background:rgba(21,12,7,.30);overflow:hidden;height:100%;transition:border-color 1.2s var(--ease)}
+.vessel .fill{position:absolute;left:0;right:0;bottom:0;height:0;transition:height 2.2s var(--ease)}
+.vessel .cap{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--slip);opacity:.8;z-index:2}
+.vessel.lit{border-color:rgba(224,174,92,.55)}
+.vessel.lit .fill{height:100%;
+  background:linear-gradient(0deg,var(--gold) 0%,var(--gold-hot) 60%,var(--gold-pale) 100%);
+  box-shadow:0 0 54px rgba(224,174,92,.26)}
+.vessel.latent{border-color:rgba(38,74,90,.6)}
+.vessel.latent::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(108deg,transparent 0 8px,rgba(38,74,90,.16) 8px 9px)}
+.vessel.ignited{border-color:rgba(212,112,60,.6)}
+.vessel.ignited .fill{height:100%;
+  background:linear-gradient(0deg,var(--terra) 0%,var(--terra-hi) 65%,#f0c6a4 100%);
+  box-shadow:0 0 54px rgba(180,82,42,.28)}
+
+@keyframes pulse{from{filter:brightness(.92)}to{filter:brightness(1.12)}}
+
+.drop{border:1px dashed rgba(244,236,224,.28);padding:clamp(26px,4vw,44px);text-align:left;
+  cursor:pointer;transition:all .6s var(--ease);display:block}
+.drop:hover,.drop.hover{border-color:var(--gold-hot);background:rgba(224,174,92,.05)}
+.drop input{display:none}
+.demo{margin:0 0 30px;padding:22px 24px;border:1px solid rgba(244,236,224,.14);
+  background:rgba(224,174,92,.04)}
+.demo p{margin:8px 0 0;font-size:15px;line-height:1.55}
+.demo .row{margin-top:14px}
+.demokey{display:block;margin-top:14px;padding:12px 14px;background:rgba(21,12,7,.5);
+  border:1px solid rgba(244,236,224,.12);color:var(--gold-hot);font-size:12.5px;
+  line-height:1.7;word-spacing:.12em;user-select:all}
+.drop code{color:var(--gold-hot);font-size:13px}
+
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:18px}
+input[type=text]{flex:1 1 260px;min-width:0;padding:13px 15px;background:rgba(21,12,7,.5);
+  border:1px solid var(--rule);color:var(--slip);font-family:var(--mono);font-size:13.5px}
+input[type=text]:focus{outline:none;border-color:var(--zellij-hi)}
+input[type=text]::placeholder{color:rgba(176,168,156,.6)}
+button{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  padding:13px 24px;border:1px solid rgba(224,174,92,.5);background:transparent;color:var(--gold-hot);
+  cursor:pointer;transition:all .6s var(--ease)}
+button:hover:not(:disabled){background:rgba(224,174,92,.1)}
+button:disabled{opacity:.32;cursor:not-allowed}
+button.fire{border-color:rgba(212,112,60,.6);color:var(--terra-hi)}
+button.fire:hover:not(:disabled){background:rgba(180,82,42,.12)}
+button.ghost{border-color:var(--rule);color:var(--slip-dim)}
+#origin{font-family:var(--mono);color:var(--slip-dim);font-size:12.5px;line-height:1.7;margin-top:14px}
+#info{color:var(--zellij-hi);font-size:13px;margin-top:16px;min-height:1.4em}
+#err{color:var(--terra-hi);font-size:13px;margin-top:8px;min-height:1.2em}
+#passon{margin-top:14px;padding:16px;background:rgba(21,12,7,.55);border:1px solid rgba(224,174,92,.3);
+  font-size:13px;line-height:1.9;color:var(--gold-pale);word-spacing:.28em}
+</style>
+</head>
+<body>
+<div class="ground"></div><div class="wash"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .07 0"/></filter>
+  <rect width="100%" height="100%" filter="url(#g)"/></svg>
+
+<div class="wrap">
+<nav class="top">
+  <a class="home" href="index.html" aria-label="Zariia — home" title="Zariia — home">
+    <img src="zariia-symbol.svg" alt="" width="31" height="31"><span>Zariia</span></a>
+  <span class="sp"></span>
+  <a href="the-object.html">The object</a>
+  <a href="the-name.html">The name</a>
+  <a href="historicising.html">History</a>
+  <a href="curatorial.html">The rooms</a>
+  <a href="artists.html">Artists</a>
+  <a href="releases.html">Releases</a>
+  <a href="player.html" aria-current="page">Player</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<header class="essaytop">
+  <span class="label"><span class="star"></span>the player</span>
+  <h1>Two channels, one file</h1>
+  <p class="lede" style="margin-top:22px;max-width:46ch">Everything happens in this page. The file
+  never leaves your machine, the key is never sent anywhere, and nothing is stored when you
+  close it.</p>
+</header>
+
+<figure class="plate">
+  <img src="img/ground-wire.jpg" alt="Two strings side by side against a black ground. One catches a warm light along its whole length; the second falls almost entirely into shadow." loading="lazy">
+  <figcaption>Two channels in one object. The player lights the second one.</figcaption>
+</figure>
+
+
+<section style="padding-top:0">
+  <div class="bay flip">
+    <div class="aperture rise" style="--lx:40%;--ly:26%">
+      <div class="vessels" id="stage">
+        <div class="vessel" id="chOpen"><div class="fill"></div><div class="cap">open</div></div>
+        <div class="vessel" id="chSealed"><div class="fill"></div><div class="cap">sealed</div></div>
+      </div>
+
+      <label class="drop" id="drop">
+        <span class="label warm">step one</span>
+        <span id="dropText">Drop a Zariia file here, or click to choose one. A plain
+        <code>.flac</code> works too — it will simply have no sealed channel.</span>
+        <input type="file" id="file" accept=".flac,audio/flac">
+      </label>
+
+
+      <div id="controls" hidden>
+        <div class="row">
+          <button id="play" disabled>Play</button>
+          <button id="stop" class="ghost" disabled>Stop</button>
+        </div>
+        <div class="row" id="keyRow" hidden>
+          <input type="text" id="key" placeholder="paste the key — 24 words, or hex" autocomplete="off" spellcheck="false">
+          <button id="unlock" class="fire">Unlock</button>
+        </div>
+        <div class="row" id="passonRow" hidden>
+          <button id="passonBtn" class="ghost">Show the key, to pass on ▸</button>
+        </div>
+        <div id="passon" hidden></div>
+      </div>
+
+      <div id="origin"></div>
+      <div id="info"></div>
+      <div id="err"></div>
+    </div>
+
+    <div class="rise">
+      <div class="demo">
+        <span class="label warm">or try the demo record</span>
+        <p>Six seconds, made to be taken apart rather than listened to. Its key is printed
+        here because it is a demo — a real key is never published.</p>
+        <div class="row">
+          <button id="demoBtn" class="ghost">Load the demo record</button>
+        </div>
+        <code class="demokey" id="demoKey">chef ignore vast rely rare flat dwarf try invest december picture shield eye hub wolf idea dinosaur divide width neck tiger devote swap sweet</code>
+        <p class="quiet">Load it, then press Unlock — the key is filled in for you. Try a
+        wrong word first if you want to see it refused.</p>
+      </div>
+
+      <span class="label"><span class="star"></span>what you are looking at</span>
+      <h2 style="font-size:clamp(26px,3.4vw,40px)">Two vessels standing in the dark.</h2>
+      <p>The left one is the open song. Load any file and it fills with gold — that channel plays
+      for anybody, with no key and no permission.</p>
+      <p>The right one is the sealed channel. If the file carries one, the vessel appears
+      <em>cold and outlined</em>: present, visible, and empty. That is the honest picture of the
+      thing. You can see that something is there. You cannot hear it.</p>
+      <p>With the right key it fills from the bottom upward in vermilion, and both channels sound
+      together. A wrong key does not partially open it or degrade gracefully. It is refused.</p>
+      <p class="quiet" style="margin-top:24px">This page fetches nothing from anywhere else.
+      The sealed channel is compressed with the Opus audio codec, an open format your browser
+      already knows how to decode, so there is no decoder to download and no third party
+      involved in opening a record.</p>
+      <p class="quiet"><a href="the-object.html">How the format works ▸</a></p>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer><div class="wrap"><div class="colophon">
+  <span><a href="index.html">Zariia</a></span><span>Ahmedabad</span>
+    <span><a href="credits.html">Credits</a></span>
+    <span><a href="contact.html">Contact</a></span>
+  <span>Nothing uploaded · nothing stored · no analytics</span>
+</div></div></footer>
+
+<script type="module">
+import { extract, hasSealedChannel, audioDigest, extractSignature } from './lib/zariia-flac.mjs';
+import { verifyRelease } from './lib/zariia-sign.mjs';
+import { unseal, KEYMODE } from './lib/zariia-crypto.mjs';
+import { readBundle, ENTRY, CODEC } from './lib/zariia-bundle.mjs';
+import { parseKey, keyToMnemonic } from './lib/zariia-key.mjs';
+
+// This page reaches nowhere else. Sealed channels are Opus (or FLAC/WAV), all of which
+// the browser decodes natively, so there is no model to fetch and no CSP exception.
+//
+// 🔴 The neural-codec path was REMOVED on 29 July 2026 and this comment is the record of
+// why. It fetched an 84 MB Mimi decoder from Hugging Face, whose weights are served from
+// `us.aws.cdn.hf.co` — a host the site's own CSP did not allow. The fetch was blocked, the
+// failure fell into the same catch as a bad key, and the player told a keyholder with the
+// CORRECT key that their key was wrong. Verified in the live player and confirmed by
+// re-running with CSP bypassed, where the same file opened. Mimi buys about 17× on a
+// channel that is 80 KB as Opus, against an 84 MB dependency on somebody else's server.
+// If it ever comes back, it gets bundled locally — never fetched.
+async function decodeSecond(audio){
+  if (audio.codec === CODEC.MIMI){
+    throw new Error('This record uses the neural codec, which this player no longer carries. Repack it with --codec opus.');
+  }
+  return await ctx().decodeAudioData(audio.bytes.slice().buffer);
+}
+
+const $ = id => document.getElementById(id);
+const stage=$('stage'), chOpen=$('chOpen'), chSealed=$('chSealed'), drop=$('drop'), fileInput=$('file');
+let audioCtx=null, fileBytes=null, sealedBlob=null, openBuf=null, secondBuf=null, sources=[], playing=false, passKey=null;
+function ctx(){ audioCtx ||= new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function say(m){ $('info').textContent = m; }
+function fail(m){ $('err').textContent = m; }
+
+['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hover')}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,()=>drop.classList.remove('hover')));
+drop.addEventListener('drop',ev=>{ev.preventDefault(); if(ev.dataTransfer.files[0]) loadFile(ev.dataTransfer.files[0])});
+fileInput.addEventListener('change',()=>{ if(fileInput.files[0]) loadFile(fileInput.files[0]) });
+
+async function loadFile(file){
+  fail(''); say(''); stop(); secondBuf=null; passKey=null;
+  chOpen.className='vessel'; chSealed.className='vessel';
+  $('keyRow').hidden=true; $('passonRow').hidden=true; $('passon').hidden=true;
+  fileBytes = new Uint8Array(await file.arrayBuffer());
+  $('dropText').innerHTML = `Loaded <code>${file.name}</code> — ${(fileBytes.length/1024).toFixed(0)} KB`;
+  $('controls').hidden=false;
+  try{
+    openBuf = await ctx().decodeAudioData(fileBytes.slice().buffer);
+    chOpen.classList.add('lit');
+    $('play').disabled=false;
+  }catch{
+    $('play').disabled=true;
+    fail('This browser could not decode the open track. Try a current Chrome or Firefox.');
+  }
+  // Origin, stated plainly. NEVER a tick, shield or badge: nothing that dresses a
+  // claim in authority. This reports a fact and stops.
+  const sigBytes = extractSignature(fileBytes);
+  $('origin').textContent = sigBytes
+    ? 'This file carries a label signature. Verifying origin needs the published label key, which is not yet issued.'
+    : 'This file is unsigned — nothing attests where it came from.';
+
+  if (hasSealedChannel(fileBytes)){
+    sealedBlob = extract(fileBytes);
+    chSealed.classList.add('latent');
+    $('keyRow').hidden=false;
+    say(`A sealed channel is present (${(sealedBlob.length/1024).toFixed(1)} KB). Hold the key to fill it.`);
+  } else {
+    say('No sealed channel — this is just the open song.');
+  }
+}
+
+$('unlock').addEventListener('click', async ()=>{
+  fail('');
+  const raw = $('key').value.trim(); if(!raw) return;
+  let keySpec;
+  try{
+    const parsed = await parseKey(raw);
+    keySpec = parsed ? {mode:KEYMODE.RAW, rawKey:parsed.key} : {mode:KEYMODE.PASSPHRASE_PBKDF2, passphrase:raw};
+  }catch(e){ fail(e.message); return; }
+  // 🔴 Two failures, two messages. These were one bare `catch` until 29 July 2026, so
+  // ANY failure after decryption — a blocked download, an unknown codec — was reported
+  // as "that key did not open it". A keyholder with the right key was told it was wrong.
+  // The seal opening is proof the key was right: AES-GCM authenticates, so a bad key
+  // cannot get past unseal(). Nothing below this line may claim otherwise.
+  let plaintext;
+  try{
+    plaintext = await unseal(sealedBlob, keySpec, await audioDigest(fileBytes));
+  }catch{
+    chSealed.classList.remove('ignited'); chSealed.classList.add('latent'); secondBuf=null;
+    fail('That key did not open it. Wrong key, or this is not a Zariia file.');
+    return;
+  }
+  try{
+    const audio = readBundle(plaintext).find(e=>e.type===ENTRY.AUDIO);
+    if(!audio) throw new Error('the sealed channel carries no audio entry');
+    secondBuf = await decodeSecond(audio);
+    chSealed.classList.remove('latent'); chSealed.classList.add('ignited');
+    say('Unlocked. Press play for the complete work — both channels in sync.');
+    passKey = keySpec.mode===KEYMODE.RAW ? keySpec.rawKey : null;
+    $('passonRow').hidden = !passKey;
+    $('passon').hidden = true; $('passonBtn').textContent='Show the key, to pass on ▸';
+    if(playing){ stop(); play(); }
+  }catch(e){
+    chSealed.classList.remove('ignited'); chSealed.classList.add('latent'); secondBuf=null;
+    fail(`The key was right — the seal opened. What failed afterwards was playing it back: ${e.message}`);
+  }
+});
+
+// The demo record, served from this site. Its key is on the page because it is a demo.
+$('demoBtn').addEventListener('click', async ()=>{
+  fail(''); say('Fetching the demo record…');
+  try{
+    // ?v= is not decoration. Cloudflare cached a 404 for the bare path for four hours
+    // when the file was briefly missing on 29 July 2026, and served it to everyone.
+    // The query string is part of the cache key, so bumping it retires a bad entry —
+    // and must be bumped whenever the demo record is replaced.
+    const r = await fetch('demo/zariia-demo.flac?v=20260729a');
+    if(!r.ok) throw new Error(`the file did not load (HTTP ${r.status})`);
+    const buf = new Uint8Array(await r.arrayBuffer());
+    await loadFile(new File([buf], 'zariia-demo.flac', {type:'audio/flac'}));
+    $('key').value = $('demoKey').textContent.trim();
+  }catch(e){ fail(`Could not load the demo: ${e.message}`); }
+});
+
+$('passonBtn').addEventListener('click', async ()=>{
+  const el=$('passon');
+  if(el.hidden && passKey){ el.textContent = await keyToMnemonic(passKey); el.hidden=false;
+    $('passonBtn').textContent='Hide the key ▾'; }
+  else { el.hidden=true; $('passonBtn').textContent='Show the key, to pass on ▸'; }
+});
+
+function play(){
+  const c=ctx(); if(c.state==='suspended') c.resume();
+  const t0=c.currentTime+0.08; sources=[];
+  const start=buf=>{const s=c.createBufferSource();s.buffer=buf;s.connect(c.destination);s.start(t0);sources.push(s)};
+  start(openBuf); if(secondBuf) start(secondBuf);
+  sources[0].onended=()=>{ if(playing) stop(); };
+  playing=true; stage.classList.add('playing');
+  $('play').disabled=true; $('stop').disabled=false;
+}
+function stop(){
+  sources.forEach(s=>{try{s.stop()}catch{}}); sources=[]; playing=false;
+  stage.classList.remove('playing');
+  $('play').disabled=!openBuf; $('stop').disabled=true;
+}
+$('play').addEventListener('click',play);
+$('stop').addEventListener('click',stop);
+
+
+</script>
+</body>
+</html>

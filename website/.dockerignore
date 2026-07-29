@@ -1,0 +1,9 @@
+README.md
+DEPLOY.md
+.dockerignore
+Dockerfile
+captain-definition
+*.bak
+.DS_Store
+og-source.html
+*.tar

@@ -1,0 +1,19 @@
+{
+  "name": "zariia-carrier",
+  "version": "0.1.0",
+  "description": "Reference implementation of the Zariia carrier: an open music track carrying an encrypted second channel, unlocked by a key. Presence open, content keyed.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tests/roundtrip.mjs",
+    "pack": "node src/zariia-pack.mjs",
+    "unpack": "node src/zariia-unpack.mjs",
+    "serve": "node serve.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0"
+  }
+}

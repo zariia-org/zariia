@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   ZARIIA — the chord, the type and the motion as CSS variables.
+   In sync with `brand.md` and `../website/zariia.css` as of 26 July 2026.
+   If you change one, change all three.
+
+   The body is FIRED EARTHENWARE, not indigo night (revised 26 Jul). Gold is
+   the open song; terracotta is the sealed channel alight, and it arrives as
+   a MASS, never a line; zellij blue-teal is the cold latent state and the
+   machinery. Sober: colour glows, nothing flares, nothing pulses.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── the clay body ── */
+  --z-clay:        #2e170e;   /* fired clay — the vessel itself, ground top */
+  --z-fired:       #150c07;   /* the base of the page */
+  --z-slip-black:  #0d0705;   /* black slip — deepest; never #000 */
+  --z-clay-lit:    #412013;   /* the lit side of the body */
+
+  /* ── the open song ── */
+  --z-gold:        #e0ae5c;   /* struck gold — light held, not switched on */
+  --z-gold-hi:     #f2d79c;   /* its high note */
+  --z-gold-deep:   #b98a3e;
+
+  /* ── the sealed channel, alight ── */
+  --z-terra:       #b4522a;   /* terracotta — a MASS, never a line */
+  --z-terra-hi:    #d4703c;
+  --z-terra-deep:  #7a3218;
+
+  /* ── the cold counter-voice ── */
+  --z-zellij:      #1c5a6e;   /* Moroccan blue-teal */
+  --z-zellij-hi:   #3d93a6;   /* machinery, labels, links */
+  --z-latent:      #264a5a;   /* the sealed-but-locked contour */
+
+  /* ── bone slip: the painted line on the pot ── */
+  --z-slip:        #eadfcb;   /* text; never sRGB white */
+  --z-slip-dim:    #a3947a;
+  --z-rule:        rgba(234, 223, 203, 0.13);
+  --z-rule-lit:    rgba(224, 174, 92, 0.30);
+
+  /* ── type: display carries prose too; mono is machinery only ── */
+  --z-display: 'Antic Didone', serif;
+  --z-mono:    'Cutive Mono', ui-monospace, monospace;
+
+  /* ── motion: almost nothing moves ── */
+  --z-ease:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --z-settle:  120s;  /* the ground's slow drift */
+  --z-ignite:  2.2s;  /* the sealed channel rising into light on unlock */
+}
+
+/* ── Compatibility aliases ──────────────────────────────────────────────
+   The 26 July chord rewrite renamed every variable (indigo night → fired
+   earthenware). `brand.html` and `carrier/player/index.html` were written
+   against the old names and rendered with UNSET variables until these were
+   added — invisible text on a black page, no error anywhere.
+
+   These map the retired names onto the current chord so nothing is broken.
+   The names below are DEPRECATED: use the canonical ones above in new work,
+   and retire an alias when its last caller stops using it.               */
+:root{
+  --z-night-top:   var(--z-clay);        /* was #0a0f2e indigo */
+  --z-night-mid:   var(--z-fired);       /* was #0b0a20 */
+  --z-night-root:  var(--z-slip-black);  /* was #1a0d10 umber */
+  --z-cream:       var(--z-slip);        /* was #f4ece0 */
+  --z-cream-dim:   var(--z-slip-dim);    /* was #b0a89c */
+  --z-gold-hot:    var(--z-gold-hi);     /* was #ffd766 neon */
+  --z-fire:        var(--z-terra);       /* was #e0431e vermilion */
+  --z-fire-hot:    var(--z-terra-hi);    /* was #ff7a34 */
+  --z-teal-hot:    var(--z-zellij-hi);   /* was #37c4c4 */
+  --z-teal-latent: var(--z-latent);      /* was #2a6a9a */
+  --z-line:        var(--z-rule);
+  --z-ink-glass:   rgba(13, 7, 5, 0.5);  /* dim dark-glass panels */
+  --z-breath:      4.5s;                 /* retired from the site; player still reads it */
+}

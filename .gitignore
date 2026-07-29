@@ -1,0 +1,50 @@
+# Secrets. carrier/.gitignore already excludes carrier/.env; repeated here so the
+# rule survives that file being moved or rewritten. A live Featherless API key
+# lives in carrier/.env — it must never reach a remote, private or otherwise.
+.env
+*.env
+!*.env.example
+
+# Dependencies and build output
+node_modules/
+website/zariia.tar
+
+# Audio: releases and working files are carried by hand, not by git
+*.flac
+*.opus
+*.ecdc
+*.wav
+
+# One exception: the demo record IS the site. It is offered on the player page, the
+# build refuses to ship without it, and its key is printed on that page — so it is
+# published material, not a release. Keeping it out of git would mean the repo alone
+# cannot produce a working deploy.
+!website/demo/zariia-demo.flac
+
+# Keys and anything generated that opens a record
+SAMPLE-KEY.txt
+*.key
+*.pem
+
+# macOS
+.DS_Store
+
+# ── Held back from the remote on purpose (Prayas, 28 July 2026) ────────────
+# Not junk. These are deliberate exclusions, so they are listed here rather
+# than merely left unstaged — an ignore rule survives a later `git add -A`,
+# a habit does not.
+#
+#   process-tracker.md   internal; the tracker's own header says it is never
+#                        published, never quoted outward, never shown to a
+#                        participant
+#   archive-shutdown-tool/  the retired scope, kept for reference. Reading it
+#                        as current would reintroduce a position that was set
+#                        down deliberately
+#   funding.md           funding strategy, IFA/Goethe/Pro Helvetia, FCRA and
+#                        the open Koher fiscal-sponsorship question
+#   movd.md              Museum of Vestigial Desire archive, 468 KB, a
+#                        different project that happens to live in this folder
+docs/process-tracker.md
+docs/archive-shutdown-tool/
+docs/funding.md
+movd.md

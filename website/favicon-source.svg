@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Zariia">
+  <!--
+    Favicon variant — NOT the logo shrunk down.
+    At 16px the full mark reduces to a dot with a stem: the ground line, the specular
+    highlight and the waveform bit all fall below one pixel and simply disappear.
+    So this is redrawn for the size: the key fills far more of the tile, strokes are
+    roughly 2.5x heavier, the ground line is dropped, and the waveform bit is reduced
+    to a single stroke that still reads as "not a lollipop". Same object, drawn for
+    where it will be seen. Regenerate the raster set with the commands in DEPLOY.md.
+  -->
+  <defs>
+    <linearGradient id="f" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b1509"/><stop offset="1" stop-color="#0d0705"/>
+    </linearGradient>
+    <linearGradient id="m" gradientUnits="userSpaceOnUse" x1="18" y1="8" x2="46" y2="56">
+      <stop offset="0" stop-color="#f8e2b4"/><stop offset="0.5" stop-color="#e8b968"/><stop offset="1" stop-color="#cf9642"/>
+    </linearGradient>
+    <radialGradient id="a" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#fff0d2"/><stop offset="0.45" stop-color="#f2a850"/><stop offset="1" stop-color="#b8541f"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="13" fill="url(#f)"/>
+  <!-- bow: a heavy ring, filling the tile -->
+  <circle cx="32" cy="25" r="14.5" fill="none" stroke="url(#m)" stroke-width="5"/>
+  <circle cx="32" cy="25" r="6.5" fill="url(#a)"/>
+  <!-- shank: userSpaceOnUse gradient — a vertical line has a zero-width bbox -->
+  <line x1="32" y1="39.5" x2="32" y2="54" stroke="url(#m)" stroke-width="5" stroke-linecap="round"/>
+  <!-- bit: one stroke, so it survives at 16px -->
+  <line x1="32" y1="49" x2="43" y2="49" stroke="url(#m)" stroke-width="4.5" stroke-linecap="round"/>
+</svg>

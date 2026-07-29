@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<!-- Source for og.png (1200x630). Regenerate:
+     chrome --headless --screenshot=og.png --window-size=1200,630 og-source.html -->
+<link rel="stylesheet" href="fonts.css?v=20260728a">
+<style>
+:root{
+  --clay:#2e170e; --fired:#150c07; --slipblack:#0d0705;
+  --gold:#e0ae5c; --goldhi:#f2d79c; --terra:#b4522a; --terrahi:#d4703c;
+  --zellij:#3d93a6; --slip:#eadfcb; --slipdim:#a3947a;
+  --meander:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='18' viewBox='0 0 34 18'%3E%3Cg fill='none' stroke='%23e0ae5c' stroke-width='1' stroke-linecap='square'%3E%3Cpath d='M0 17h34'/%3E%3Cpath d='M4 17V4h13v9H9V8h4'/%3E%3Cpath d='M21 17V4h13'/%3E%3C/g%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;position:relative;
+  font-family:'Antic Didone',serif;color:var(--slip);
+  background:
+    radial-gradient(96% 60% at 80% 2%, rgba(180,82,42,.20), transparent 58%),
+    radial-gradient(80% 58% at 6% 100%, rgba(28,90,110,.22), transparent 62%),
+    linear-gradient(172deg,#26130c 0%,var(--fired) 46%,var(--slipblack) 100%)}
+/* the potter's wheel-trace */
+body::before{content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(180deg,rgba(234,223,203,.03) 0 1px,transparent 1px 7px)}
+/* depth */
+body::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(118% 90% at 46% 40%,transparent 38%,rgba(0,0,0,.52) 100%)}
+.inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  justify-content:center;padding:0 84px}
+.lock{display:flex;align-items:center;gap:38px}
+.lock img{width:132px;height:132px;flex:none}
+.wm{font-size:118px;line-height:.92;letter-spacing:.045em;color:var(--goldhi)}
+.tag{font-family:'Cutive Mono',monospace;font-size:15px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--terrahi);margin-top:16px}
+.rule{height:18px;width:340px;background-image:var(--meander);background-repeat:repeat-x;
+  background-size:34px 18px;opacity:.30;margin:42px 0 34px}
+.line{font-size:33px;line-height:1.42;max-width:23ch;color:rgba(234,223,203,.92)}
+.line b{font-weight:400;color:var(--goldhi)}
+.foot{position:absolute;bottom:54px;left:84px;font-family:'Cutive Mono',monospace;
+  font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--slipdim)}
+/* the sealed channel, present and unlit — the idea, at the edge of the frame */
+.sealed{position:absolute;right:-90px;top:96px;width:430px;height:438px;
+  border:1px solid rgba(38,74,90,.55);background:rgba(13,7,5,.30);
+  box-shadow:inset 0 0 0 9px rgba(38,74,90,.30), inset 0 0 0 19px rgba(38,74,90,.17);
+  z-index:1}
+.sealed::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(112deg,transparent 0 12px,rgba(38,74,90,.07) 12px 13px)}
+</style></head>
+<body>
+<div class="sealed"></div>
+<div class="inner">
+  <div class="lock"><img src="zariia-symbol.svg" alt=""><div>
+    <div class="wm">Zariia</div><div class="tag">Open music · keyed truths</div></div></div>
+  <div class="rule"></div>
+  <div class="line">A track plays for anyone. <b>The key completes it.</b></div>
+</div>
+<div class="foot">zariia.org</div>
+</body></html>
