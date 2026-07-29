@@ -58,6 +58,11 @@
   border:1px solid rgba(244,236,224,.12);color:var(--gold-hot);font-size:12.5px;
   line-height:1.7;word-spacing:.12em;user-select:all}
 .drop code{color:var(--gold-hot);font-size:13px}
+.source{margin-top:36px;padding-top:26px;border-top:1px solid var(--rule)}
+.source p{font-size:15px;line-height:1.6;margin:12px 0 0}
+.source ul{margin:16px 0 0;padding:0;list-style:none}
+.source li{font-family:var(--mono);font-size:12.5px;line-height:1.6;padding:7px 0;
+  border-bottom:1px solid rgba(244,236,224,.07);color:var(--slip-dim)}
 
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:18px}
 input[type=text]{flex:1 1 260px;min-width:0;padding:13px 15px;background:rgba(21,12,7,.5);
@@ -178,6 +183,29 @@ button.ghost{border-color:var(--rule);color:var(--slip-dim)}
       already knows how to decode, so there is no decoder to download and no third party
       involved in opening a record.</p>
       <p class="quiet"><a href="the-object.html">How the format works ▸</a></p>
+
+      <div class="source">
+        <span class="label"><span class="star"></span>the source</span>
+        <p>This page is the whole player. Nothing is minified and nothing is hidden, so the
+        quickest reading is your browser's view-source — the modules it imports are served
+        from <a href="lib/zariia-crypto.mjs">/lib/</a> and are plain, short files.</p>
+        <ul>
+          <li><a href="https://github.com/zariia-org/zariia/blob/main/website/player.html">player.html</a>
+            — this page, decryption and playback included</li>
+          <li><a href="https://github.com/zariia-org/zariia/tree/main/website/lib">website/lib/</a>
+            — the format as the browser runs it: the FLAC block, the seal, the bundle, the key</li>
+          <li><a href="https://github.com/zariia-org/zariia/tree/main/carrier">carrier/</a>
+            — the studio side, which packs a record and mints its key</li>
+        </ul>
+        <p>Opening a record needs nothing installed, so there is nothing to download here. The
+        format is written out in
+        <a href="https://github.com/zariia-org/zariia#how-a-record-is-opened">how a record is
+        opened</a> and at greater length in
+        <a href="https://github.com/zariia-org/zariia/blob/main/carrier/README.md">carrier/README.md</a>.
+        A standard FLAC metadata block, AES-256-GCM, a bundle of typed entries. Any language with
+        an AES library can open a record given its key, and this player has no privileged part in
+        it.</p>
+      </div>
     </div>
   </div>
 </section>
