@@ -33,7 +33,7 @@ channels in sync. Six seconds, made to be taken apart rather than listened to.
 carrier/    the object itself. Sealed channel bound to its open track so it cannot be
             lifted onto another record, label signing, per-drop keys, no-passphrase
             enforced. `npm test` — 14 assertions.
-website/    zariia.org. Ten pages and a working player.
+website/    zariia.org. Eleven pages and a working player.
 brand/      mark, lockup, palette, brand sheet. All three in sync.
 docs/concept/
             the form and the carrier · where the name comes from · how the key is
