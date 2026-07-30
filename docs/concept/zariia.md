@@ -38,6 +38,42 @@ not explain.
 This project takes that structure and folds the extra discs *into the first one*, sealed. One track,
 released openly. A second channel, locked. The key is what completes the work.
 
+## 🔴 Zariia notates a structure that already exists. It does not invent one (30 July 2026)
+
+*Prayas: "this second channel is already there. There are private parties, the scenes to which
+you're invited only if on a person-to-person way. So this is just making it explicit. It's already
+there — we're not saying that we are creating this, no, it's already there. But explicitly
+specifying it."*
+
+**This is the project's foundational claim and it governs how everything else is written.** The
+two-channel structure — one thing said in the open, another said only to whoever is in the room — is
+not a format Zariia thought of. It is how private gatherings have always worked. Zariia's
+contribution is to make it explicit and to build a carrier for it, which is notation rather than
+invention.
+
+`curatorial-brief.md` §II.A makes a weaker version of this about *form*: the baithak has been the
+invited room for two centuries, so a label that convenes rooms is not making an avant-garde gesture.
+The claim here is stronger and about the present. The second channel already runs, socially, now.
+
+Three consequences, and each one changes an argument recorded elsewhere.
+
+**It defuses §V.1, the risk that the concept eats the music.** A notation of an existing practice is
+not a conceit imposed on musicians. The format is not asking anyone to illustrate an idea; it is
+writing down what the room was already doing.
+
+**It answers `curation-by-demonstration.md` §IV.3 without claiming exteriority.** Bourdieu's finding
+is that refusing publicity is a legible position-taking move *inside* the market rather than an exit
+from it. That finding bites on a project claiming to have founded something outside the field. It
+does not bite the same way on a project declining the premise that anything is being founded.
+
+**It changes what the first release has to prove.** A label that invented a form has to justify the
+form. A label that notated one only has to be accurate. The burden moves from originality to
+fidelity, and fidelity is the easier burden to carry honestly and the harder one to fake.
+
+**How to say it, and how not to.** *This already exists; we are specifying it* is the register. *We
+have made something new* is not, and neither is any phrasing in which Zariia is the origin of the
+practice rather than a notation of it.
+
 ## The record of the form (25 July 2026)
 
 The passage below is the concept as it arrived in conversation. It is kept verbatim because the form
@@ -190,5 +226,19 @@ posted tape, which the giving was evidence of.
   being invited is the same act as being handed a key** — occasional by design, no release
   schedule, no submissions process.
 
-  Still open underneath it: who is invited first, where the sessions happen, and how the
-  musicians are credited and paid.
+  **Extended 30 July 2026 — records *and* residencies, and the residencies are for non-musicians.**
+  Sessions remain the form a release takes. Alongside them Zariia runs **residencies: virtual,
+  notional and unpaid** — a span of time and a frame, not a place or a stipend. A residency is
+  preparation; a session is still a room. Terms and the reasoning are in `../residencies.md`.
+
+  The residencies are **for people who are not musicians**, which gives the label the editorial
+  criterion `curatorial-brief.md` §IV otherwise lacks. Not because trained musicians are lesser —
+  positions are what get weighed here, never people — but because a training carries settled ideas
+  about what performance and production are, and the odd work is likelier to come from a practice
+  that never acquired them. The instruments in `../../music/` exist for exactly this: the firing,
+  the stepwell and the zellij are sendable, and a residency can begin by handing one over.
+
+  ✅ **Credit and pay settled 30 July 2026** (`../../open-questions.md` §2): a flat fee per person,
+  the same for everyone in the room, paid before release; artists keep their rights and Zariia takes
+  an exclusive licence to the session recording. What remains is the figure, which waits on funding
+  rather than on a decision.
