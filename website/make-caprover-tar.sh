@@ -37,6 +37,7 @@ REQUIRED_FILES=(
   player.html
   curatorial.html
   artists.html
+  residencies.html
   credits.html
   contact.html
   zariia.css
