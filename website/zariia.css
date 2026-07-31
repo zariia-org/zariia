@@ -38,7 +38,7 @@
    Type: Antic Didone (display AND prose) / Cutive Mono (machinery only).
    ═══════════════════════════════════════════════════════════════════════ */
 
-:root{
+:root{--measure:64ch;
   /* the clay body */
   --fired:#150c07; --fired-deep:#0d0705; --clay:#2e170e; --clay-lit:#412013;
   /* red-figure terracotta */
@@ -296,7 +296,7 @@ h3{font-size:clamp(24px,2.3vw,31px);color:var(--gold);margin:46px 0 14px}
 /* Running text is Garamond. The measure is in ch, and Garamond's ch is narrower
    than the didone's, so the counts are raised to keep the same physical measure. */
 p,li{font-family:var(--text);font-size:20px;line-height:1.66;
-  margin-bottom:21px;max-width:64ch;color:rgba(234,223,203,.90)}
+  margin-bottom:21px;max-width:var(--measure);color:rgba(234,223,203,.90)}
 p.lede{font-family:var(--display);font-size:clamp(24px,2.4vw,31px);line-height:1.46;
   color:var(--gold-hi);margin-bottom:22px;max-width:38ch}
 /* The quiet asides carry real content, so they no longer sit at 13px in the
@@ -337,7 +337,8 @@ nav.top .sp{flex:1}
   opacity:.46;background-image:var(--meander);background-repeat:repeat-x;background-size:34px 18px}
 .essaytop h1{font-size:clamp(38px,6.4vw,80px);max-width:17ch;line-height:1.1}
 .essay{max-width:none}
-.essay p,.essay li{max-width:70ch}
+.essay{--measure:70ch}
+.essay p,.essay li{max-width:var(--measure)}
 .essay .pull{font-family:var(--display);font-size:clamp(25px,2.5vw,33px);line-height:1.42;
   color:var(--gold-hi);margin:44px 0;padding-left:30px;
   border-left:2px solid var(--terra);max-width:32ch}
@@ -381,12 +382,33 @@ figcaption{font-family:var(--mono);font-size:13.5px;line-height:1.8;
   color:rgba(234,223,203,.70);
   margin-top:26px;max-width:78ch;padding-left:22px;border-left:1px solid var(--rule-lit)}
 figcaption b{font-weight:400;color:var(--gold)}
-.fig-wide{margin-left:calc(-1 * clamp(0px,3vw,60px));margin-right:calc(-1 * clamp(0px,3vw,60px))}
+/* 🔴 Diagrams are WIDER than the text and CENTRED ON IT, 31 July 2026.
+   The old rule pulled them wider with equal negative margins, which centred
+   them on the .wrap content box (centre 953px at 1920) while the text column's
+   centre is 797px — so every figure sat 156px right of the text it belonged to
+   and read as bleeding off the right edge. It was never a width problem.
+   --shift moves the figure left by half the difference between the content box
+   and the measure, so its centre lands on the text's centre and the extra width
+   spills equally both ways. Guarded at 0 so it cannot invert once the content
+   box is narrower than the measure (mobile). */
+.fig-wide{
+  --bleed:clamp(0px,3vw,60px);
+  --shift:max(0px, calc((100% - var(--measure)) / 2));
+  max-width:none;
+  margin-left:calc(-1 * var(--bleed) - var(--shift));
+  margin-right:calc(-1 * var(--bleed) + var(--shift));
+}
 /* Shared figure ink. Weights raised and the cold voice lifted, 27 July 2026:
    the drawings were the best thing on the site and were being rendered in
    hairlines at 1.4 and a teal that measured ~2:1 against the ground, so the
    sealed half of every figure — the half the whole label is about — was the
    half you could not see. */
+/* ⚠️ 31 July 2026: an attempt to compensate for the narrower figure box by
+   scaling these up 1.34x was REVERTED. Font-size inside a viewBox is in user
+   units, so enlarging the type enlarges it relative to the drawing's own
+   coordinates — labels laid out side by side then collide and clip. Seen on
+   curatorial.html's three-inheritances and sealed-channel rows. The geometry
+   below is the 27 July tuning and must not be rescaled to chase render size. */
 .f-line{fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .f-thin{fill:none;stroke:var(--gold);stroke-width:1.1;opacity:.72}
 .f-cold{fill:none;stroke:var(--zellij-hi);stroke-width:1.8}
