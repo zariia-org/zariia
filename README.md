@@ -1,4 +1,10 @@
+<img src="badges/zariia-symbol.svg" width="76" align="right" alt="">
+
 # Zariia
+
+[![site zariia.org](badges/site.svg)](https://zariia.org)
+[![channels: open + sealed](badges/channels.svg)](https://zariia.org/the-object)
+[![analytics: none, by choice](badges/no-analytics.svg)](https://zariia.org/not-knowing)
 
 A music label. It releases records that carry a sealed second channel, unlocked by a key.
 
