@@ -68,7 +68,7 @@ does not bite the same way on a project declining the premise that anything is b
 
 **It changes what the first release has to prove.** A label that invented a form has to justify the
 form. A label that notated one only has to be accurate. The burden moves from originality to
-fidelity, and fidelity is the easier burden to carry honestly and the harder one to fake.
+fidelity, which is easier to carry honestly and harder to fake.
 
 **How to say it, and how not to.** *This already exists; we are specifying it* is the register. *We
 have made something new* is not, and neither is any phrasing in which Zariia is the origin of the
@@ -151,6 +151,25 @@ The public face is real music, and it streams anywhere because it *is* just musi
 downloaded file, whose exact bytes carry the sealed channel. The key completes the record; it does
 not enrol anyone.
 
+## The law the form obeys (30 July 2026)
+
+The relation this object is built on was written down years earlier, by the Museum of Vestigial
+Desire. *Audience*, 8 October 2013:
+
+> "Intensity and access are inversely related, the more the access the less the intensity and the
+> less the access the more the intensity. … Every ear on which our message is incident dulls our
+> message."
+
+A record with a sealed channel is that law made into one object. The open track sits at the
+high-access end and loses intensity for it. At the other end the sealed channel gains that intensity
+back, because fewer people reach it. Nothing between them is resolved. The object runs both settings
+at once, and the key is what moves a listener from one to the other.
+
+The same text refuses to read the law as an instruction to stay small: *"Narrowcasting or
+broadcasting are available choices and are employed as required."* So the position is not against
+reach; it is against reach as the default. The brief's instruction to decide open against keyed per
+release is that choice and nothing more.
+
 ## Why this is a subculture, not cassette culture
 
 Cassette culture gated the **object** — you got the tape by being in the scene, and once you held it
@@ -181,7 +200,7 @@ posted tape, which the giving was evidence of.
   What is protected is the *content*, by the key. Do not describe Zariia as hiding from anyone.
 - **This is not evasion, and must never be built or described as evasion.** The subcultural framing
   is avowable — you can say plainly what the object is. That is the whole point, and it is also what
-  moment it is pitched as defeating surveillance, that protection is gone.
+  protects it: the moment it is pitched as defeating surveillance, that protection is gone.
 - **The content is only ever as safe as the key and who holds it.** The music sounding identical is
   solved. The confidentiality rests entirely on key handling. There is nothing else load-bearing to
   be fragile about, and nothing else to over-claim.

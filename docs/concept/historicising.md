@@ -16,6 +16,66 @@ particular moment for it to appear at all.
 Applied to Zariia the answer is unflattering in a specific way, and I think the unflattering
 version is the correct one.
 
+## The text this project runs on
+
+*Placed here 31 July 2026, at Prayas's instruction, and moved up out of the list of lineages below.
+It does not belong in a list. Everything else in this document is a resemblance found afterwards;
+this one is the position the label is an instance of.*
+
+**MoVD, *Audience*, 8 October 2013.**
+https://museumofvestigialdesire.net/books/self/audience
+
+It opens by not knowing who is there.
+
+> "Who is the other? Who listens when we speak? Is it fair to even expect someone to do so?"
+
+Then it states the law the object runs on:
+
+> "When you produce an experience, you have the freedom to narrow its scope of access to alter its
+> intensity. Intensity and access are inversely related, the more the access the less the intensity
+> and the less the access the more the intensity. So the freedom to narrow the scope of experiences
+> that we produce is important. If we didn't have that freedom, we would be compulsive
+> mass-broadcasters."
+
+And then, having refused the pose of surveying an audience:
+
+> "As far as this museum is concerned, we do not need to measure. We do not keep server logs, so
+> there is no way of knowing how many people visit the website. If you do not know a number it can
+> be anything. It can be zero and it can be infinite."
+
+A record with a sealed channel runs both settings the essay describes, on one object, at the same
+time. The open track takes the high-access setting. The sealed channel takes the low one. Neither
+cancels the other and nothing has to be resolved between them, which is what the essay means by
+*narrowcasting or broadcasting are available choices and are employed as required*. The position was
+never against reach. It is against reach as a default.
+
+Three further things the essay settles, and they reach further than the format.
+
+**It gives the addressee.** *"We work for the frustrated seeker, seeking nourishing clarifying
+content on the internet."* An activity, and therefore observable — somebody either came looking or
+did not. Everything in this project that tries to describe its people by what they *are* should be
+replaced by this.
+
+**It rules out judging from a report.** *"There is no scope to judge the quality of an experience on
+the basis of dry third-party reportage."* You had to be there. That single sentence is why convening
+is not a preference here, and it is also the older form of the rule this project only arrived at in
+July 2026, that a person's account of themselves is a claim and not evidence.
+
+**It makes non-connection ordinary.** *"Each experience is meant for a specific audience. If you
+cannot connect with something it means that it wasn't meant for you."* A record that reaches four
+people has not failed. It may have been made for four people.
+
+*Auto-education* (25 November 2013) supplies the test: corrosion, the trace left in a room, as the
+proof that a presence functioned. Zariia wants the corrosion without the display of it.
+
+🔴 **And this is not a lineage, which is why it was moved out of the list.** The caution at the foot
+of this document says lineages found afterwards flatter the thing that finds them, and that caution
+bites hardest here, because the author is the same person. Finding your own thirteen-year-old text
+behind your new project proves continuity and proves nothing else. Every other case in this document
+is at least evidence that someone unconnected arrived at the same shape under their own conditions.
+This one is evidence that Prayas has held a position for a long time. That is worth something, and
+it is not the same thing, and the two should never be counted together.
+
 ## The thesis: this is a recapitulation
 
 Zariia invents nothing. Every layer of it returns a technique that already existed and was
@@ -95,6 +155,51 @@ does to the people using it. A record you cannot fully hear until somebody hands
 a technical improvement on a record you can. It is a different social object, and the difference is
 the point.
 
+## Three lineages added 30 July 2026
+
+These came out of a day's searching and reading. They do not all share the abandonment property
+above: the Bombay translation below ran under active repression, and the shabda/artha division was
+never abandoned at all. So the generalisation stays scoped to the original four.
+
+*There was a fourth here, the museum's own texts. It was moved to the front of this document on 31
+July 2026 and is no longer counted with these — for the reason given there, that a text by the same
+author is continuity rather than inheritance, and the two do not add up.*
+
+### The two-part text
+
+Indian poetics already divides a text into **shabda**, the sound part, and **artha**, the meaning
+part (Velcheru Narayana Rao, on translation). Texts
+that are *artha pradhana* translate freely, which is why the Puranas travel. Pure shabda does not —
+*"you cannot translate the sound of the Vedas"* — and Kalidasa was never translated into any Indian
+language for the same reason. So the tradition this label works inside already had a form with one
+part that travels and one that does not.
+
+It arrives with its worst instance attached. The restriction on who may hear pure shabda includes
+the Manusmriti provision that a Shudra who overheard Vedic recitation should have molten lead poured
+into his ears. So the subcontinent's oldest keyed channel is also its ugliest. The warning this
+project carries about invited rooms concentrating who can already be in rooms has a textual ancestor
+as well as a sociological form. Never cite this lineage as flattering.
+
+### A samizdat translation, Bombay 1975
+
+During the Emergency, a Bengali editor's open letter mourning the death of democracy was published
+in a little magazine; the magazine was banned and the editor jailed. A copy reached Ashok Shahane in
+Bombay. He translated the entire issue, no Marathi magazine would print it, and he circulated the
+translation hand to hand among friends, collecting about four hundred rupees by money order for the
+jailed man's wife (reported in *The Caravan*, July 2017). An unpublished work moved between people
+who knew each other because publication had been foreclosed. That is the shape of this label's
+distribution. It happened within living memory and in Marathi, and the publisher who did it still
+keeps no website. It is here for its form and not its cause.
+
+### Illegibility as the only property claim
+
+Amrute's *Encoding Race, Encoding Class* (2016) records Indian programmers on restrictive visas in
+Berlin writing "Spaghetti Code": they withheld commentary and notation on purpose, so the work
+stayed hard to decipher and they stayed indispensable, in a regime where the code could cross
+borders and they could not (as reported in the *Savage Minds* review, August 2017). Here a sealed
+channel is a labour tactic. It is the one property claim available to somebody whose work travels
+more freely than they do, and nobody designed it — an ethnographer found it.
+
 ## The tension this leaves
 
 Two histories are available and they do not sit together.
@@ -104,9 +209,9 @@ political condition, does a narrow job while that condition holds, and is supers
 lifts. On this reading the room is what remains after the good channel is closed, and Zariia is a
 fallback with a decent argument.
 
-The convening reading is different in kind. On that account the room was always the better place to
-dependence that was already worth refusing. This reading has Cage and Lucier behind it, and it is
-much closer to Prayas's own practice.
+The convening reading is different in kind. On that account the room was always the better place, and
+losing the open channel only ended a dependence that was already worth refusing. This reading has
+Cage and Lucier behind it, and it is much closer to Prayas's own practice.
 
 Both are defensible. They produce different projects, different public copy, and different answers
 eventually. It does not have to choose today, and pretending the choice has already been made would
@@ -128,7 +233,13 @@ may be pleasant. It is not an argument.
 
 *Factual claims verified 26 July 2026: the Cage forces, premiere date and chance basis; the Lucier
 process, with its text deliberately not quoted; the NOS/Hobbyscoop and BASICODE broadcasts from
-around 1979 and Ventilator 202's roughly 150 broadcasts, 1983–1986; magnitizdat and roentgenizdat; the Iranian cassette circulation of 1978–79. The Indian
+around 1979 and Ventilator 202's roughly 150 broadcasts, 1983–1986; magnitizdat and roentgenizdat;
+the Iranian cassette circulation of 1978–79.*
 
-*This has not been through `de-ai-cold-read`. It must be, before any part of it is published or said
-in public.*
+*Sources for the 30 July 2026 additions: the shabda/artha account from Velcheru Narayana Rao, with
+the Manusmriti provision carried as its own caution; the
+Shahane episode from The Caravan, "Ashok Shahane's deep imprint on Indian modernist literature",
+July 2017; the Amrute passage from the Savage Minds review of* Encoding Race, Encoding Class
+*(August 2017); the MoVD texts read in situ the same night.*
+
+*Cold-read for machine cadence on 31 July 2026, before this went public.*
