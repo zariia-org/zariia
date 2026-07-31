@@ -4,7 +4,7 @@ FROM nginx:1.27-alpine
 RUN rm -f /etc/nginx/conf.d/default.conf
 COPY nginx.conf headers.conf /etc/nginx/conf.d/
 
-COPY index.html the-object.html the-name.html historicising.html releases.html player.html curatorial.html artists.html residencies.html credits.html contact.html \
+COPY index.html not-knowing.html the-object.html the-name.html historicising.html releases.html player.html curatorial.html artists.html residencies.html credits.html contact.html \
      zariia.css fonts.css zariia-symbol.svg og.png \
      favicon.ico favicon-source.svg favicon-32.png apple-touch-icon.png icon-512.png \
      site.webmanifest /usr/share/nginx/html/

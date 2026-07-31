@@ -30,6 +30,7 @@ REQUIRED_FILES=(
   nginx.conf
   headers.conf
   index.html
+  not-knowing.html
   the-object.html
   the-name.html
   historicising.html
