@@ -14,6 +14,30 @@
 
 set -euo pipefail
 
+# ── RENDER AUDIT ──────────────────────────────────────────────────────────────
+# The same reasoning as the missing-file rule above, applied to what a page
+# LOOKS like. A clipped SVG label, a label printed over another label, or type
+# rendering below the legibility floor produces no error, no warning and no
+# failing test — the browser simply stops painting at the viewBox edge. One such
+# label was live from the day its figure was drawn until 31 July 2026.
+#
+# audit.mjs drives a real browser over every page at two widths and exits 1 on
+# anything unresolved. Findings can be accepted, with a reason and a date, in
+# audit-accepted.json; everything else stops the build here rather than shipping.
+# Set AUDIT_SKIP=1 only to ship a fix for something the audit itself has broken.
+if [[ "${AUDIT_SKIP:-0}" != "1" ]]; then
+  echo "[audit] checking svgs, sizes and contrast across all pages…"
+  if ! node "$(dirname "$0")/audit.mjs"; then
+    echo ""
+    echo "[ERROR] Render audit failed. Nothing was built."
+    echo "        Fix the findings above, or accept one with a reason:"
+    echo "          node audit.mjs --accept"
+    exit 3
+  fi
+else
+  echo "[audit] SKIPPED via AUDIT_SKIP=1 — this build was not checked."
+fi
+
 APP_NAME="zariia"
 TAR_FILE="${APP_NAME}.tar"
 TMP_DIR="/tmp/${APP_NAME}_deploy_$$"
