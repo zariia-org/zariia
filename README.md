@@ -142,3 +142,31 @@ proof the key was right: AES-GCM authenticates before it returns a single byte.
 ## Conventions
 
 British English throughout. All work is Prayas Abhinav's.
+
+## Licence, and what it does not cover
+
+The code here is **AGPL-3.0** — see `LICENSE`. Same licence as the instruments at
+[zariia-org/instruments](https://github.com/zariia-org/instruments), so the two trees agree.
+
+**The brand is not the format.** `brand/` holds the wordmark, the symbol and the lockup. A
+copyright licence does not convey trademark rights, and these marks identify a particular label
+and the records it releases. Use the code; please do not use the marks to identify work that is
+not ours. The distinction is the point rather than a restriction: a record made by somebody else
+is theirs, and putting our mark on it would say something untrue about where it came from.
+
+## You do not need this code
+
+Zariia notates a structure that already exists. It did not invent one. One thing said in the open
+and another only to whoever is in the room is how private gatherings have always worked, and
+records have carried that shape before — *Zaireeka* in 1997 is four discs on four machines, and it
+needs no software at all.
+
+What is here is one implementation, and it composes public standards rather than inventing any: a
+**FLAC** `APPLICATION` block, the **Opus** audio codec (RFC 6716 — nothing to do with the language
+model of the same name), **AES-GCM**, **PBKDF2** and **SHA-256** for key derivation, **Ed25519**
+for the signature, and the **BIP-0039** wordlist for the twenty-four spoken words. Every one of
+those has multiple independent implementations and most ship in the browser.
+
+So a record with a sealed second channel can be built from that paragraph, by anyone, without
+reading a line of this. Reading it only helps if you want a file **this** player opens. That is a
+smaller and less interesting goal than making your own, and we would rather you made your own.
