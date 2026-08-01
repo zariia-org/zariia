@@ -54,6 +54,7 @@ REQUIRED_FILES=(
   nginx.conf
   headers.conf
   index.html
+  buffer.html
   not-knowing.html
   the-object.html
   the-name.html
@@ -185,6 +186,21 @@ if [[ -n "$offsite" ]]; then
   echo "[FATAL] a page loads something off-site:"; sed 's/^/        /' <<<"$offsite"; exit 10
 fi
 echo "[build] CSP strictly same-origin, no off-site loads"
+
+# 3d. Local pre-publish hook. If ../.pre-publish.sh exists and is executable it is run
+#     against the staged tree, and a non-zero exit stops the build. This is where checks
+#     that belong to one working copy live rather than in this shared script. Its
+#     presence or absence is printed on every build, so a missing hook is visible rather
+#     than silent — but enforcing that it exists is the working copy's business, not
+#     this file's.
+HOOK="$(cd "$(dirname "$0")/.." && pwd)/.pre-publish.sh"
+if [[ -x "$HOOK" ]]; then
+  if ! "$HOOK" "$TMP_DIR"; then
+    echo "[FATAL] local pre-publish hook rejected this build"; exit 11
+  fi
+else
+  echo "[build] no local pre-publish hook"
+fi
 
 # 4. Never ship secrets or local cruft.
 find "$TMP_DIR" \( -name '.env' -o -name '*.bak' -o -name '.DS_Store' \) -delete

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buffer — Zariia</title>
+<meta name="description" content="A holding page. Work that is not a release, my own tracks, and things that reached me. Nothing here is the catalogue.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zariia">
+<meta property="og:title" content="Buffer — Zariia">
+<meta property="og:description" content="Work that is not a release, my own tracks, and things that reached me. Nothing here is the catalogue.">
+<meta property="og:url" content="https://zariia.org/buffer">
+<meta property="og:image" content="https://zariia.org/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Zariia mark — a key standing on a ground line — beside the wordmark, with the sealed channel drawn as nested frames.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://zariia.org/buffer">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-source.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#150c07">
+<link rel="stylesheet" href="fonts.css?v=20260731b">
+<link rel="stylesheet" href="zariia.css?v=20260731b">
+<style>
+/* Three strands, held apart by a ruled edge rather than by a card. A card would
+   make each strand a container; they are registers on one body. */
+.strand{border-left:1px solid var(--rule-lit);padding-left:clamp(20px,3vw,38px);
+  margin:38px 0 0}
+.strand:first-of-type{margin-top:8px}
+.strand h3{margin-top:0}
+.strand .who{font-family:var(--mono);font-size:13px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--zellij-hi);display:block;margin-bottom:14px}
+/* The empty state is the page's actual content today, so it is set as a field
+   rather than as a small notice. */
+.holding{border:1px solid rgba(38,74,90,.45);background:rgba(21,12,7,.24);
+  padding:clamp(26px,3.4vw,44px);position:relative;margin-top:26px}
+.holding::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(114deg,transparent 0 9px,rgba(38,74,90,.10) 9px 10px)}
+.holding p{position:relative;z-index:2}
+.holding p:last-child{margin-bottom:0}
+/* The refusals sit in the bay's short column as a counterweight, so the strands do
+   not run as a lone ribbon down the left of a wide screen. A mass must fill its
+   column — the 27 July lesson. */
+.refusals{border-top:1px solid var(--rule-lit);padding-top:26px;
+  position:sticky;top:clamp(28px,5vh,64px)}
+.refusals ul{margin:0}
+.refusals li{margin-bottom:14px}
+@media(max-width:820px){.refusals{position:static}}
+/* An item. Title, then the name of whoever made it, then whatever carries it —
+   a link, an <audio>, nothing. No date and no number, by design. */
+.item{margin-top:30px;padding-top:26px;border-top:1px solid var(--rule)}
+.item:first-of-type{border-top:none;padding-top:0}
+.item h4{font-family:var(--display);font-size:clamp(21px,2vw,27px);
+  font-weight:400;margin:0 0 6px;color:var(--gold-hi)}
+.item .by{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;
+  color:var(--slip-dim);display:block;margin-bottom:14px}
+.item audio{width:100%;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="ground"></div><div class="wash"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch"/>
+  <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .07 0"/></filter>
+  <rect width="100%" height="100%" filter="url(#g)"/></svg>
+
+<div class="wrap">
+<nav class="top">
+  <a class="home" href="index.html" aria-label="Zariia — home" title="Zariia — home">
+    <img src="zariia-symbol.svg" alt="" width="31" height="31"><span>Zariia</span></a>
+  <span class="sp"></span>
+  <a href="not-knowing.html">Not knowing</a>
+  <a href="the-object.html">The object</a>
+  <a href="curatorial.html">The rooms</a>
+  <a href="residencies.html">Residencies</a>
+  <a href="releases.html">Releases</a>
+  <a href="player.html">Player</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<header class="essaytop">
+  <span class="label"><span class="star"></span>buffer</span>
+  <h1>Buffer</h1>
+  <p class="lede" style="margin-top:22px;max-width:46ch">Work that is not a release, my own tracks,
+  and things that reached me. None of it is the catalogue, and none of it is on a schedule.</p>
+</header>
+
+<section class="essay">
+  <p>A buffer holds something on its way between two places. That is what this page is for. The
+  <a href="releases.html">catalogue</a> is for records, and a record is a compilation that came out
+  of a room with several people in it. Most of what I touch is not that, and until now there
+  was nowhere for the rest of it.</p>
+
+  <div class="holding">
+    <p><b>There is nothing on it yet.</b> The page exists before its contents. That is the wrong way
+    round. I am not putting anything here until there is something to put.</p>
+  </div>
+
+  <h3>What goes on it</h3>
+  <p>Three kinds of thing, and only one of them is mine.</p>
+
+  <div class="bay">
+  <div>
+
+  <div class="strand">
+    <span class="who">work by other people</span>
+    <p>Work by anybody, from anywhere. Somebody sends it to me. That is the whole mechanism. There
+    is no form to fill in. No call, no round. I am not asking anyone for anything.</p>
+    <p>It stays theirs. I take no licence and claim nothing exclusive. The same file can go anywhere
+    else its maker wants, at the same time, and nobody needs to ask me. It is credited to whoever
+    made it and says nothing else about them.</p>
+    <p class="quiet">Being here leads to nothing. It is not a way in, and I am not considering
+    anybody for anything because of it. Records come out of rooms people are invited to. That happens
+    somewhere else.</p>
+    <!-- ITEM TEMPLATE — copy this inside any strand and delete the comment markers.
+         No date, no number, no ordering: the name is the whole of the credit.
+    <div class="item">
+      <h4>Title of the thing</h4>
+      <span class="by">whoever made it</span>
+      <p>A sentence about what it is, if one is needed. Often none is.</p>
+      <audio controls preload="none" src="work/filename.flac"></audio>
+    </div>
+         For a link out, drop the <audio> and wrap the title:
+         <h4><a href="https://…">Title of the thing</a></h4>
+         Anything under work/ must also be added to the Dockerfile AND to
+         make-caprover-tar.sh, or the build ships without it and says nothing. -->
+  </div>
+
+  <div class="strand">
+    <span class="who">my own</span>
+    <p>I build the instruments and I make tracks with them, and that work goes out under my own name.
+    It is not a Zariia release. It is not in the catalogue and it never will be. Because the instruments and
+    the two-channel format are the same either way, a listener cannot tell the difference from the
+    object itself. The credit line has to carry it. Mine will say my name and not the label's.</p>
+  </div>
+
+  <div class="strand">
+    <span class="who">things that reached me</span>
+    <p>Links out. Work, writing, recordings, tools. I have been listening and reading in a particular
+    direction, and this is what came to me. That is all a list like this ever is. It is not a survey.
+    Nobody has looked at the whole field. There is no register of who is working in it. I am not in a
+    position to tell you who matters.</p>
+  </div>
+
+  </div>
+
+  <div>
+    <div class="refusals">
+      <span class="label cold">what it is not</span>
+      <ul>
+        <li>Not the catalogue. Nothing here carries a release number and nothing here is a Zariia
+        record.</li>
+        <li>Not dated. No feed, no archive by month, nothing that reads as a schedule.</li>
+        <li>Not counted. No plays, and nothing ordered in a way that implies a ranking.</li>
+        <li>Not a listing of anybody. I publish work, with the name of whoever made it. Nothing here
+        says what anyone <em>is</em>.</li>
+      </ul>
+      <p class="quiet">The last one is why this is shaped as a holding page and not as a showcase.
+      The label <a href="residencies.html">publishes work and credits makers</a>. It does not
+      publish what people are called.</p>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="colophon">
+    <span><a href="index.html">Zariia</a></span><span>Ahmedabad</span>
+    <span><a href="buffer.html">Buffer</a></span>
+    <span><a href="artists.html">Artists</a></span>
+    <span><a href="the-name.html">The name</a></span>
+    <span><a href="historicising.html">History</a></span>
+    <span><a href="credits.html">Credits</a></span>
+    <span>No trackers, no analytics, no cookies</span>
+  </div>
+</footer>
+</div>
+
+</body>
+</html>
